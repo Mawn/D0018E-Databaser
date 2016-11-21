@@ -18,10 +18,10 @@ textarea {
 
 /* Form Control */
 .form-control-feedback {
-	position: relative;
-	display: inline;
-	top: 0;
-	line-height: 14px;
+  position: relative;
+  display: inline;
+  top: 0;
+  line-height: 14px;
 }
 
 .lead {
@@ -78,7 +78,7 @@ textarea {
 
 /* Carousel base class */
 .carousel {
-  height: 500px;
+  height: 400px;
   margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
@@ -88,7 +88,7 @@ textarea {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 500px;
+  height: 400px;
   background-color: #777;
 }
 .carousel-inner > .item > img {
@@ -97,6 +97,10 @@ textarea {
   left: 0;
   min-width: 40%;
   height: 500px;
+}
+
+.carousel-indicators {
+  margin-bottom: -10px;
 }
 
 
