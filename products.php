@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Front-End Test</title>
+    <title>Products - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script
@@ -16,6 +16,9 @@
     .row.content {height: 340px}
     
     /* Set gray background color and 100% height */
+	.container{
+		padding-left: 23px;
+	}
     .sidenav {
 	  margin-top: 20px;
       background-color: #f5f5f5;
@@ -94,7 +97,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">#Dreamteam</a>
+          <a class="navbar-brand" href="index.php">#Dreamteam</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -172,17 +175,17 @@
 			    <div class="carousel-inner" role="listbox">
 				  <div class="item active">
 				    <a href="products.html">
-				      <img class="first-slide" src="http://lorempixel.com/500/300/animals" alt="First slide" width="100%"></img>
+				      <img class="first-slide" src="BlackFriday.png" alt="First slide" width="100%"></img>
 				    </a>
 				  </div>
 				  <div class="item">
 				    <a href="products.html">
-				      <img class="second-slide" src="http://lorempixel.com/500/300/abstract" alt="Second slide" width="100%"></img>
+				      <img class="second-slide" src="http://lorempixel.com/500/300/animals" alt="Second slide" width="100%"></img>
 				    </a>
 				  </div>
 				  <div class="item">
 				    <a href="products.html">
-				      <img class="third-slide" src="https://teknikmagasinet3-654395.c.cdn77.org/storage/ma/9d4f37bfaa7b479f97d2c5150777c58a/48cc568e81ac4625aad8a50cacaf3383/png/E3531E7BBCDEC65E9BEF6BACC632647C91751DD7/Karusell%20Lagerrensning_SE.png" alt="Third slide" width="100%"></img>
+				      <img class="third-slide" src="BlackFriday.png" alt="Third slide" width="100%"></img>
 				    </a>
 				  </div>
 				</div>
