@@ -26,7 +26,6 @@
 	  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
 			  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
     }
-	
 	.carousel {
 	  height: 340px;
 	  margin-bottom: 60px;
@@ -41,6 +40,9 @@
 	  left: 0;
 	  min-width: 40%;
 	  height: 340px;
+	}
+	.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+	  height: 100%;
 	}
 	</style>
   </head>
@@ -69,7 +71,17 @@
 		$i = $i + 1;
 	  }
 	  mysqli_free_result($result);
-
+	  $sql = "SELECT * FROM productcategory";
+	  $result = mysqli_query($conn,$sql);
+	  $k = 0;
+	  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+		$catid[$k] = $row['id'];
+		$catname[$k] = $row['name'];
+		$caturl[$k] = $row['url'];
+		$k = $k + 1;
+	  }
+	  mysqli_free_result($result);
+	  
 	?> 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -137,11 +149,14 @@
             <h2>Products</h2>
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#">All Products</a></li>
-              <li><a href="products/mice.php">Mice</a></li>
+			  <?php for($n=0;$n<$k;$n++): ?>
+				<li><a href="products/<?= $caturl[$n] ?>"><?= $catname[$n] ?></a></li>
+		      <?php endfor ?>
+              <!---<li><a href="products/mice.php">Mice</a></li>
               <li><a href="products/keyboards.php">Keyboards</a></li>
               <li><a href="products/monitors.php">Monitors</a></li>
 			  <li><a href="products/mousepads.php">Mouse Pads</a></li>
-			  <li><a href="products/headsets.php">Headsets</a></li>
+			  <li><a href="products/headsets.php">Headsets</a></li>--->
             </ul><br>
           </div>
           <br>
@@ -167,7 +182,7 @@
 				  </div>
 				  <div class="item">
 				    <a href="products.html">
-				      <img class="third-slide" src="http://lorempixel.com/500/300/nature" alt="Third slide" width="100%"></img>
+				      <img class="third-slide" src="https://teknikmagasinet3-654395.c.cdn77.org/storage/ma/9d4f37bfaa7b479f97d2c5150777c58a/48cc568e81ac4625aad8a50cacaf3383/png/E3531E7BBCDEC65E9BEF6BACC632647C91751DD7/Karusell%20Lagerrensning_SE.png" alt="Third slide" width="100%"></img>
 				    </a>
 				  </div>
 				</div>

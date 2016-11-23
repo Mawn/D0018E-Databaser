@@ -11,7 +11,18 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+	  .carousel {
+        margin-top: 20px;
+	    margin-bottom: 60px;
+	  }
+	  .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+		width: 100%;
+	    height: 100%;
+	  }
+    </style>
   </head>
+  
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -86,12 +97,12 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="item active">
-		  <a href="products.html">
-            <img class="first-slide" src="http://lorempixel.com/500/200/animals" alt="First slide" width="100%"></img>
+		  <a href="products.php">
+            <img class="first-slide" src="BlackFriday.png" alt="First slide" width="100%"></img>
 		  </a>
         </div>
         <div class="item">
-          <img class="second-slide" src="http://lorempixel.com/500/200/abstract" alt="Second slide">
+          <img class="second-slide" src="http://lorempixel.com/500/200/animals" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
               <h1>Headline</h1>
