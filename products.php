@@ -20,12 +20,13 @@
 	  margin-top: 20px;
       background-color: #f5f5f5;
       height: 100%;
-	  border-color: ¤ffffff;
+	  border-color: #ffffff;
 	  border: 1px solid #e3e3e3;
 	  border-radius: 3px;
 	  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
 			  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
     }
+	
 	.carousel {
 	  height: 340px;
 	  margin-bottom: 60px;
@@ -71,7 +72,7 @@
 
 	?> 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -87,7 +88,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li>
-		      <a href="index.html">Home</a>
+		      <a href="index.php">Home</a>
 			</li>
 			<li class="dropdown active">
 			  <a href="#">Products <small><span class="glyphicon glyphicon-menu-down"></span></small></a>
@@ -136,11 +137,11 @@
             <h2>Products</h2>
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#">All Products</a></li>
-              <li><a href="mice.php">Mice</a></li>
-              <li><a href="keyboards.php">Keyboards</a></li>
-              <li><a href="monitors.php">Monitors</a></li>
-			  <li><a href="mousepads.php">Mouse Pads</a></li>
-			  <li><a href="headsets.php">Headsets</a></li>
+              <li><a href="products/mice.php">Mice</a></li>
+              <li><a href="products/keyboards.php">Keyboards</a></li>
+              <li><a href="products/monitors.php">Monitors</a></li>
+			  <li><a href="products/mousepads.php">Mouse Pads</a></li>
+			  <li><a href="products/headsets.php">Headsets</a></li>
             </ul><br>
           </div>
           <br>

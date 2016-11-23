@@ -78,7 +78,7 @@
 			  <a href="../products.php">Products <small><span class="glyphicon glyphicon-menu-down"></span></small></a>
 			  <ul class="dropdown-menu">
 				<li>
-				  <a href="#">Mice</a>
+				  <a href="mice.php">Mice</a>
 				</li>
 				<li>
 				  <a href="keyboards.php">Keyboards</a>
@@ -90,7 +90,7 @@
 				  <a href="mousepads.php">Mouse Pads</a>
 				</li>
 				<li>
-				  <a href="headsets.php">Headsets</a>
+				  <a href="#">Headsets</a>
 				</li>
 			  </ul>
 			</li>
@@ -121,17 +121,17 @@
             <h2>Products</h2>
             <ul class="nav nav-pills nav-stacked">
               <li><a href="../products.php">All Products</a></li>
-              <li class="active"><a href="#">Mice</a></li>
+              <li><a href="mice.php">Mice</a></li>
               <li><a href="keyboards.php">Keyboards</a></li>
               <li><a href="monitors.php">Monitors</a></li>
 			  <li><a href="mousepads.php">Mouse Pads</a></li>
-			  <li><a href="headsets.php">Headsets</a></li>
+			  <li class="active"><a href="#">Headsets</a></li>
             </ul><br>
           </div>
           <br>
 		  <div class="col-sm-9">
 			<?php for($j=0;$j<$i;$j++): ?>
-			  <?php if($prodcategoryid[$j] == 1):?>
+			  <?php if($prodcategoryid[$j] == 5):?>
 			    <div class="col-sm-4">
 			      <div class="well well-sm">
 				    <img class="img-thumbnail" src="<?= $prodimageurl[$j] ?>" height="240" width="240">
