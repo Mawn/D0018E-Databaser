@@ -53,6 +53,16 @@
 		$i = $i + 1;
 	  }
 	  mysqli_free_result($result);
+	  $sql = "SELECT * FROM productcategory";
+	  $result = mysqli_query($conn,$sql);
+	  $k = 0;
+	  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+		$catid[$k] = $row['id'];
+		$catname[$k] = $row['name'];
+		$caturl[$k] = $row['url'];
+		$k = $k + 1;
+	  }
+	  mysqli_free_result($result);
 
 	?> 
     <!-- Navigation -->
@@ -121,11 +131,18 @@
             <h2>Products</h2>
             <ul class="nav nav-pills nav-stacked">
               <li><a href="../products.php">All Products</a></li>
-              <li class="active"><a href="#">Mice</a></li>
+			  <?php for($n=0;$n<$k;$n++): ?>
+			    <?php if($n==0): ?>
+					<li class="active"><a href="<?= $caturl[$n] ?>"><?= $catname[$n] ?></a></li>
+					<?php else: ?>
+					<li><a href="<?= $caturl[$n] ?>"><?= $catname[$n] ?></a></li>
+					<?php endif ?>
+		      <?php endfor ?>
+              <!---<li class="active"><a href="#">Mice</a></li>
               <li><a href="keyboards.php">Keyboards</a></li>
               <li><a href="monitors.php">Monitors</a></li>
 			  <li><a href="mousepads.php">Mouse Pads</a></li>
-			  <li><a href="headsets.php">Headsets</a></li>
+			  <li><a href="headsets.php">Headsets</a></li>--->
             </ul><br>
           </div>
           <br>
