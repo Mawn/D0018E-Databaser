@@ -174,29 +174,29 @@
 				</ol>
 			    <div class="carousel-inner" role="listbox">
 				  <div class="item active">
-				    <a href="products.php">
-				      <img class="first-slide" src="BlackFriday.png" alt="Black Friday" width="100%"></img>
-				    </a>
-				  </div>
-				  <div class="item">
 				    <a href="products/mice.php">
-				      <img class="second-slide" src="heaton.png" alt="Heaton Special Offer" width="100%"></img>
+				      <img class="first-slide" src="heaton.png" alt="Heaton Special Offer" width="100%"></img>
 				    </a>
 				  </div>
 				  <div class="item">
-				      <img class="third-slide" src="Spectrum.png" alt="Login/Register" width="100%"></img>
-					  <div class="container">
-					    <div class="carousel-caption">
-						  <div class="col-md-12">
-						    <h2 class="carouseltext">Welcome to DreamTeam Luleå!</h2>
-							<p>Login or register an account for free!</p>
-							<div>
-                              <a class="btn btn-primary btn-min-block btn-theme" href="login.php">Login</a>
-							  <a class="btn btn-default btn-min-block btn-theme" href="register.php">Register</a>
-							</div>
+				    <img class="second-slide" src="Spectrum.png" alt="Login/Register" width="100%"></img>
+					<div class="container">
+					  <div class="carousel-caption">
+						<div class="col-md-12">
+						  <h2 class="carouseltext">Welcome to DreamTeam Luleå!</h2>
+					      <p>Login or register an account for free!</p>
+						  <div>
+                            <a class="btn btn-primary btn-min-block btn-theme" href="login.php">Login</a>
+							<a class="btn btn-default btn-min-block btn-theme" href="register.php">Register</a>
 						  </div>
 						</div>
 					  </div>
+					</div>
+				  </div>
+				  <div class="item">
+				    <a href="#">
+				      <img class="third-slide" src="http://lorempixel.com/500/300/animals" alt="ANIMULS" width="100%"></img>
+				    </a>
 				  </div>
 				</div>
 				<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
