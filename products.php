@@ -174,7 +174,7 @@
 				</ol>
 			    <div class="carousel-inner" role="listbox">
 				  <div class="item active">
-				    <a href="products/mice.php">
+				    <a href="products/mousepads.php">
 				      <img class="first-slide" src="heaton.png" alt="Heaton Special Offer" width="100%"></img>
 				    </a>
 				  </div>
