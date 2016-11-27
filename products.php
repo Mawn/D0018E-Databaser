@@ -47,13 +47,6 @@
 	.carousel-inner > .item > img, .carousel-inner > .item > a > img {
 	  height: 100%;
 	}
-	.carousel-indicators li {
-      background-color: #999;
-      background-color: rgba(70,70,70,.25);
-    }
-    .carousel-indicators .active {
-      background-color: #444;
-    }
 	</style>
   </head>
   <body>
@@ -133,10 +126,10 @@
 			  </ul>
 			</li>
 			<li>
-              <a href="about.html">About</a>
+              <a href="about.php">About</a>
             </li>
             <li>
-              <a href="contact.html">Contact</a>
+              <a href="contact.php">Contact</a>
             </li>
           </ul>
 	      <form class="navbar-form navbar-right">
@@ -186,14 +179,24 @@
 				    </a>
 				  </div>
 				  <div class="item">
-				    <a href="products.php">
-				      <img class="second-slide" src="http://lorempixel.com/500/300/animals" alt="Second slide" width="100%"></img>
+				    <a href="products/mice.php">
+				      <img class="second-slide" src="heaton.png" alt="Heaton Special Offer" width="100%"></img>
 				    </a>
 				  </div>
 				  <div class="item">
-				    <a href="products/mice.php">
-				      <img class="third-slide" src="http://xtrfy.com/wp-content/uploads/2015/11/XG-GP3-L-Heaton_angle4.png" alt="Heaton Special Offer" width="100%"></img>
-				    </a>
+				      <img class="third-slide" src="Spectrum.png" alt="Login/Register" width="100%"></img>
+					  <div class="container">
+					    <div class="carousel-caption">
+						  <div class="col-md-12">
+						    <h2 class="carouseltext">Welcome to DreamTeam Luleå!</h2>
+							<p>Login or register an account for free!</p>
+							<div>
+                              <a class="btn btn-primary btn-min-block btn-theme" href="login.php">Login</a>
+							  <a class="btn btn-default btn-min-block btn-theme" href="register.php">Register</a>
+							</div>
+						  </div>
+						</div>
+					  </div>
 				  </div>
 				</div>
 				<a class="left carousel-control" href="#carousel" role="button" data-slide="prev">

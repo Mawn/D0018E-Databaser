@@ -66,7 +66,7 @@
 
 	?> 
     <!-- Navigation -->
-    <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -105,10 +105,10 @@
 			  </ul>
 			</li>
 			<li>
-              <a href="../about.html">About</a>
+              <a href="../about.php">About</a>
             </li>
             <li>
-              <a href="../contact.html">Contact</a>
+              <a href="../contact.php">Contact</a>
             </li>
           </ul>
 	      <form class="navbar-form navbar-right">

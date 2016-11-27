@@ -20,6 +20,13 @@
 		width: 100%;
 	    height: 100%;
 	  }
+	  .carouseltext {
+		margin-bottom: 150px;
+	  }
+	  .btn-theme {
+	    margin-left: 15px;
+		margin-bottom: -5px;
+	  }
     </style>
   </head>
   
@@ -64,10 +71,10 @@
 			  </ul>
 			</li>
 			<li>
-              <a href="about.html">About</a>
+              <a href="about.php">About</a>
             </li>
             <li>
-              <a href="contact.html">Contact</a>
+              <a href="contact.php">Contact</a>
             </li>
           </ul>
 	      <form class="navbar-form navbar-right">
@@ -92,15 +99,31 @@
       <ol class="carousel-indicators">
         <li data-target="#carousel" data-slide-to="0" class="active"></li>
         <li data-target="#carousel" data-slide-to="1"></li>
+		<li data-target="#carousel" data-slide-to="2"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
-        <div class="item active">
+	    <div class="item active">
+	      <img class="first-slide" src="Spectrum.png" alt="Login/Register" width="100%"></img>
+		  <div class="container">
+		    <div class="carousel-caption">
+			  <div class="col-md-12">
+			    <h2 class="carouseltext">Welcome to DreamTeam Luleå!</h2>
+				<p>Login or register an account for free!</p>
+				<div>
+                  <a class="btn btn-primary btn-min-block btn-theme" href="login.php">Login</a>
+				  <a class="btn btn-default btn-min-block btn-theme" href="register.php">Register</a>
+				</div>
+			  </div>
+			</div>
+		  </div>
+	    </div>
+        <div class="item">
 		  <a href="products.php">
-            <img class="first-slide" src="BlackFriday.png" alt="First slide" width="100%"></img>
+            <img class="second-slide" src="BlackFriday.png" alt="Black Friday" width="100%"></img>
 		  </a>
         </div>
 		<div class="item">
-          <img class="second-slide" src="http://placecage.com/gif/500/200" alt="Second slide"></img>
+          <img class="third-slide" src="Niklasbur.gif" alt="NIKLAS BUR"></img>
         </div>
       </div>
       <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">

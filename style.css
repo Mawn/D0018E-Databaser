@@ -103,7 +103,38 @@ textarea {
   margin-bottom: -10px;
 }
 
+.carousel-indicators li {
+  border-color: #000000;
+  background-color: rgba(70,70,70,.25);
+}
 
+.carousel-indicators .active {
+  background-color: #2980b9;
+}
+
+/* Carousel Buttons */
+.carouseltext {
+  margin-bottom: 100px;
+}
+.btn-min-block {
+  min-width: 170px;
+  line-height: 26px;
+}
+
+.btn-theme {
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.btn-theme:hover {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
+}
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
