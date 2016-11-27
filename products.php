@@ -47,6 +47,13 @@
 	.carousel-inner > .item > img, .carousel-inner > .item > a > img {
 	  height: 100%;
 	}
+	.carousel-indicators li {
+      background-color: #999;
+      background-color: rgba(70,70,70,.25);
+    }
+    .carousel-indicators .active {
+      background-color: #444;
+    }
 	</style>
   </head>
   <body>
@@ -174,18 +181,18 @@
 				</ol>
 			    <div class="carousel-inner" role="listbox">
 				  <div class="item active">
-				    <a href="products.html">
-				      <img class="first-slide" src="BlackFriday.png" alt="First slide" width="100%"></img>
+				    <a href="products.php">
+				      <img class="first-slide" src="BlackFriday.png" alt="Black Friday" width="100%"></img>
 				    </a>
 				  </div>
 				  <div class="item">
-				    <a href="products.html">
+				    <a href="products.php">
 				      <img class="second-slide" src="http://lorempixel.com/500/300/animals" alt="Second slide" width="100%"></img>
 				    </a>
 				  </div>
 				  <div class="item">
-				    <a href="products.html">
-				      <img class="third-slide" src="BlackFriday.png" alt="Third slide" width="100%"></img>
+				    <a href="products/mice.php">
+				      <img class="third-slide" src="http://xtrfy.com/wp-content/uploads/2015/11/XG-GP3-L-Heaton_angle4.png" alt="Heaton Special Offer" width="100%"></img>
 				    </a>
 				  </div>
 				</div>
