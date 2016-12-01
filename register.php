@@ -18,17 +18,17 @@
 		margin-top: 0px;
 		margin-bottom: 10px;
       }
-	  .username-text {
+	  .email-text {
 	    color: #5a5a5a;
 		padding-left: 2px;
 		margin-top: 10px;
-		margin-bottom: 5px;
+		margin-bottom: 3px;
 		font-weight: bold;
 	  }
 	  .field-text {
 	    color: #5a5a5a;
 		padding-left: 2px;
-		margin-bottom: 0px;
+		margin-bottom: 3px;
 		font-weight: bold;
 	  }
 	  .signin-text {
@@ -47,13 +47,22 @@
 	  }
 	  .submit {
 	    margin-top: 5px;
-	    margin-bottom: 10px;
+	    margin-bottom: 5px;
 	  }
 	  h2 {
 	    color: #5a5a5a;
 	    font-size: 20px;
 	    margin-top: 0px;
 		margin-bottom: 20px;
+	  }
+      input[type='number'] {
+        -moz-appearance:textfield;
+      }	  
+      input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+	  .form-control {
+        margin-bottom: 10px;
 	  }
     </style>
   </head>
@@ -67,19 +76,19 @@
 	  {
 	    echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	  }
-       if(isset($_POST['submit'])){
-	    $username = htmlspecialchars($_POST['username']);
-		$password = hash('md5', htmlspecialchars($_POST['password']));
-		$email = htmlspecialchars($_POST['email']);
-		$age = htmlspecialchars($_POST['age']);
-		$country = htmlspecialchars($_POST['country']);
-		$zip = htmlspecialchars($_POST['zip']);
-		$phonenumber = htmlspecialchars($_POST['phonenumber']);
-       $usertype = "Customer";
-		
-		
-		$sql = "INSERT INTO user (username, password, email, age, country, zip, phonenumber, usertype) VALUES ('$username',' $password', '$email', '$age', '$country', '$zip', '$phonenumber', '$usertype')";
-	   mysqli_query($conn,$sql);
+      if(isset($_POST['submit'])){
+        $email = htmlspecialchars($_POST['email']);
+        $password = hash('md5', htmlspecialchars($_POST['password']));
+		$firstname = htmlspecialchars($_POST['firstname']);
+		$lastname = htmlspecialchars($_POST['lastname']);
+        $age = htmlspecialchars($_POST['age']);
+        $country = htmlspecialchars($_POST['country']);
+        $zip = htmlspecialchars($_POST['zip']);
+        $phonenumber = htmlspecialchars($_POST['phonenumber']);
+        $usertype = "Customer";
+
+        $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email',' $password', '$firstname', '$lastname', '$country', '$zip', '$phonenumber', '$usertype')";
+        mysqli_query($conn,$sql);
 	  }
 	?> 
     <!-- Navigation -->
@@ -144,20 +153,22 @@
 		  <div class="well well-sm">
 		    <h2><center>Create your account</center></h2>
 		    <form class="form-signin" action="" method="post">
-			  <div class="username-text">Username</div>
-              <input type="text" class="form-control" name="username" required autofocus><br>
+			  <div class="email-text">Email</div>
+              <input type="email" class="form-control" name="email" required autofocus>
 			  <div class="field-text">Password</div>
-              <input type="password" class="form-control" name="password" required><br>
-			  <div class="field-text">Email</div>
-			  <input type="email" class="form-control" name="email" required><br>
+              <input type="password" class="form-control" name="password" required>
+			  <div class="field-text">First Name</div>
+			  <input type="text" class="form-control" name="firstname" required>
+			  <div class="field-text">Last Name</div>
+			  <input type="text" class="form-control" name="lastname" required>
 			  <div class="field-text">Age</div>
-			  <input type="text" class="form-control" name="age" required><br>
+			  <input type="number" class="form-control" name="age" required min="1" max="110">
 			  <div class="field-text">Country</div>
-			  <input type="text" class="form-control" name="country" required><br>
+			  <input type="text" class="form-control" name="country" required>
 			  <div class="field-text">Zip Code</div>
-			  <input type="text" class="form-control" name="zip" required><br>
+			  <input type="number" class="form-control" name="zip" required min="97000" max="97999">
 			  <div class="field-text">Phone Number</div>
-			  <input type="text" class="form-control" name="phonenumber" required><br>
+			  <input type="text" class="form-control" name="phonenumber" required>
               <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Create an account</button>
             </form>
 		  </div>
