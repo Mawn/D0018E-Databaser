@@ -67,19 +67,19 @@
 	  {
 	    echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	  }
-	  if($_POST['submit'] == Submit){
+       if(isset($_POST['submit'])){
 	    $username = htmlspecialchars($_POST['username']);
-		$password = hash(md5, htmlspecialchars($_POST['password']));
+		$password = hash('md5', htmlspecialchars($_POST['password']));
 		$email = htmlspecialchars($_POST['email']);
 		$age = htmlspecialchars($_POST['age']);
 		$country = htmlspecialchars($_POST['country']);
 		$zip = htmlspecialchars($_POST['zip']);
 		$phonenumber = htmlspecialchars($_POST['phonenumber']);
-		$usertype = "Customer";
+       $usertype = "Customer";
 		
 		
-		$sql = "INSERT INTO user(username, password, email, age, country, zip, phonenumber, usertype) VALUES ($username, $password, $email, $age, $country, $zip, $phonenumber, $usertype)";
-	    mysqli_query($conn,$sql);
+		$sql = "INSERT INTO user (username, password, email, age, country, zip, phonenumber, usertype) VALUES ('$username',' $password', '$email', '$age', '$country', '$zip', '$phonenumber', '$usertype')";
+	   mysqli_query($conn,$sql);
 	  }
 	?> 
     <!-- Navigation -->
@@ -158,7 +158,7 @@
 			  <input type="text" class="form-control" name="zip" required><br>
 			  <div class="field-text">Phone Number</div>
 			  <input type="text" class="form-control" name="phonenumber" required><br>
-              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit">Create an account</button>
+              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Create an account</button>
             </form>
 		  </div>
 		  <div class="well well-md">
@@ -172,7 +172,8 @@
         <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
-    </div> 
+    </div>
+    
 	<!-- /container -->
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
