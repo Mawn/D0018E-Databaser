@@ -10,6 +10,7 @@
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
+	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script>
       function countChar(val) {
@@ -79,13 +80,8 @@
             </li>
           </ul>
 		  <form class="navbar-form navbar-right">
-			<div class="form-group">
-		      <input type="text" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group">
-			  <input type="password" placeholder="Password" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-info">Sign in</button>
+			<a href="login.php" class="btn btn-default">Sign in</a>
+			<a href="register.php" class="btn btn-primary">Register</a>
 		  </form>
         </div>
         <!-- /.navbar-collapse -->
@@ -145,7 +141,7 @@
 	  <div class="col-lg-5 col-md-push-1">
 		<address>
 		  <h3>DreamTeam Luleå</h3>
-		  <img src="http://www.fish-on.fr/wp-content/uploads/2016/02/Dream-Team.jpg" height="250px" width="400px"/><br>
+		  <img src="images/DreamTeam.png" height="250px" width="400px"/><br>
 		  <div class="lead">
 			<small><span class="glyphicon glyphicon-map-marker"></span></small>
 			<a href="https://www.google.com/maps/@65.5899879,22.2407347,3a,75y,190.18h,83.39t/data=!3m6!1e1!3m4!1sITopPi3vCtzzqQIbouk0oA!2e0!7i13312!8i6656!6m1!1e1" target="_blank">

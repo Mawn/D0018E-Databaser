@@ -10,6 +10,7 @@
 	<link href="../style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="../javascript.js"></script>
+	<link rel="icon" type="image/png" href="../images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 	/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -112,14 +113,9 @@
             </li>
           </ul>
 	      <form class="navbar-form navbar-right">
-			<div class="form-group">
-			  <input type="text" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group">
-			  <input type="password" placeholder="Password" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-info">Sign in</button>
-	      </form>
+			<a href="../login.php" class="btn btn-default">Sign in</a>
+			<a href="../register.php" class="btn btn-primary">Register</a>
+		  </form>
         </div>
       </div>
 	</nav>

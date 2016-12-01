@@ -10,6 +10,7 @@
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
+	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 	  .carousel {
@@ -77,14 +78,9 @@
               <a href="contact.php">Contact</a>
             </li>
           </ul>
-	      <form class="navbar-form navbar-right">
-			<div class="form-group">
-			  <input type="text" placeholder="Email" class="form-control">
-			</div>
-			<div class="form-group">
-			  <input type="password" placeholder="Password" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-info">Sign in</button>
+	     <form class="navbar-form navbar-right">
+			<a href="login.php" class="btn btn-default">Sign in</a>
+			<a href="register.php" class="btn btn-primary">Register</a>
 		  </form>
         </div>
         <!-- /.navbar-collapse -->
@@ -103,7 +99,7 @@
       </ol>
       <div class="carousel-inner" role="listbox">
 	    <div class="item active">
-	      <img class="first-slide" src="Spectrum.png" alt="Login/Register" width="100%"></img>
+	      <img class="first-slide" src="images/Spectrum.png" alt="Login/Register" width="100%"></img>
 		  <div class="container">
 		    <div class="carousel-caption">
 			  <div class="col-md-12">
@@ -119,11 +115,11 @@
 	    </div>
         <div class="item">
 		  <a href="products.php">
-            <img class="second-slide" src="BlackFriday.png" alt="Black Friday" width="100%"></img>
+            <img class="second-slide" src="images/BlackFriday.png" alt="Black Friday" width="100%"></img>
 		  </a>
         </div>
 		<div class="item">
-          <img class="third-slide" src="Niklasbur.gif" alt="NIKLAS BUR"></img>
+          <img class="third-slide" src="images/Niklasbur.gif" alt="NIKLAS BUR"></img>
         </div>
       </div>
       <a class="left carousel-control" href="#carousel" role="button" data-slide="prev">
