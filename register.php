@@ -17,8 +17,16 @@
     $phonenumber = htmlspecialchars($_POST['phonenumber']);
     $usertype = "Customer";
 
-    $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email',' $password', '$firstname', '$lastname', '$country', '$zip', '$phonenumber', '$usertype')";
-    mysqli_query($conn,$sql);
+	$sql = "SELECT * FROM user WHERE email = '$email'";
+	$result = mysqli_query($conn, $sql);
+    count = mysqli_num_rows($result);
+	mysqli_free_result($result);
+    if($count == 1) {
+      $error = "Email already belongs to another account.";
+    }else {
+      $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email',' $password', '$firstname', '$lastname', '$country', '$zip', '$phonenumber', '$usertype')";
+      mysqli_query($conn,$sql);
+    }
   }
 ?>
 <!DOCTYPE html>
