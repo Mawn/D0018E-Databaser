@@ -1,3 +1,32 @@
+<?php
+  include("connect.php");
+  session_start();
+  
+  $sql = "SELECT * FROM products";
+  $result = mysqli_query($conn,$sql);
+  $i = 0;
+  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+    $prodid[$i] = $row['id'];
+    $prodname[$i] = $row['name'];
+    $prodprice[$i] = $row['price'];
+    $prodcategoryid[$i] = $row['categoryid'];
+    $prodstock[$i] = $row['stock'];
+    $proddescription[$i] = $row['description'];
+    $prodimageurl[$i] = $row['imageurl'];
+    $i = $i + 1;
+  }
+  mysqli_free_result($result);
+  $sql = "SELECT * FROM productcategory";
+  $result = mysqli_query($conn,$sql);
+  $k = 0;
+  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+    $catid[$k] = $row['id'];
+    $catname[$k] = $row['name'];
+    $caturl[$k] = $row['url'];
+    $k = $k + 1;
+  }
+  mysqli_free_result($result);
+?> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,42 +80,6 @@
 	</style>
   </head>
   <body>
-    <?php
-	  // Create connection
-	  $conn = mysqli_connect("utbweb.its.ltu.se", "jeshma-4", "jeshma-4", "jeshma4db");
-
-	  // Check connection
-	  if (mysqli_connect_errno())
-	  {
-	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	  }
-	  
-	  $sql = "SELECT * FROM products";
-	  $result = mysqli_query($conn,$sql);
-	  $i = 0;
-	  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
-		$prodid[$i] = $row['id'];
-		$prodname[$i] = $row['name'];
-		$prodprice[$i] = $row['price'];
-		$prodcategoryid[$i] = $row['categoryid'];
-		$prodstock[$i] = $row['stock'];
-		$proddescription[$i] = $row['description'];
-		$prodimageurl[$i] = $row['imageurl'];
-		$i = $i + 1;
-	  }
-	  mysqli_free_result($result);
-	  $sql = "SELECT * FROM productcategory";
-	  $result = mysqli_query($conn,$sql);
-	  $k = 0;
-	  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
-		$catid[$k] = $row['id'];
-		$catname[$k] = $row['name'];
-		$caturl[$k] = $row['url'];
-		$k = $k + 1;
-	  }
-	  mysqli_free_result($result);
-	  
-	?> 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
       <div class="container">

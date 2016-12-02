@@ -1,3 +1,29 @@
+<?php
+  include("connect.php");
+  session_start();
+  
+  if(isset($_SESSION['login_user'])){
+    header("location: index.php");
+  }
+  
+  if(isset($_POST['submit'])){
+    $email = htmlspecialchars($_POST['email']);
+    $password = hash('md5', htmlspecialchars($_POST['password']));
+	
+    $sql = "SELECT id FROM user WHERE email = '$email' and password = '$password'";
+    $result = mysqli_query($conn,$sql);
+	$count = mysqli_num_rows($result);
+    if($count == 1) {
+      session_register("email");
+      $_SESSION['login_user'] = $email;
+      header("location: index.php");
+    }else {
+      $error = "Your Login Name or Password is invalid";
+    }
+  }
+  
+  /*mysqli_close($conn); */
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,7 +77,6 @@
 	  }
     </style>
   </head>
-  
   <body>
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -115,10 +140,10 @@
 		  <div class="well well-sm">
 		    <form class="form-signin">
 			  <div class="username-text">Email address</div>
-              <input type="text" class="form-control" required autofocus><br>
+              <input type="email" class="form-control" required autofocus><br>
 			  <div class="password-text">Password</div>
               <input type="password" class="form-control" required><br>
-              <button class="btn btn-md btn-primary btn-block submit" type="submit">Sign in</button>
+              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="login">Sign in</button>
             </form>
 		  </div>
 		  <div class="well well-md">

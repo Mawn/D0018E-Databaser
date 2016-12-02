@@ -1,3 +1,26 @@
+<?php
+  include("connect.php");
+  session_start();
+  
+  if(isset($_SESSION['login_user'])){
+    header("location: index.php");
+  }
+  
+  if(isset($_POST['submit'])){
+    $email = htmlspecialchars($_POST['email']);
+    $password = hash('md5', htmlspecialchars($_POST['password']));
+    $firstname = htmlspecialchars($_POST['firstname']);
+	$lastname = htmlspecialchars($_POST['lastname']);
+    $age = htmlspecialchars($_POST['age']);
+    $country = htmlspecialchars($_POST['country']);
+    $zip = htmlspecialchars($_POST['zip']);
+    $phonenumber = htmlspecialchars($_POST['phonenumber']);
+    $usertype = "Customer";
+
+    $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email',' $password', '$firstname', '$lastname', '$country', '$zip', '$phonenumber', '$usertype')";
+    mysqli_query($conn,$sql);
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,30 +91,6 @@
     </style>
   </head>
   <body>
-    <?php
-	  // Create connection
-	  $conn = mysqli_connect("utbweb.its.ltu.se", "jeshma-4", "jeshma-4", "jeshma4db");
-
-	  // Check connection
-	  if (mysqli_connect_errno())
-	  {
-	    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	  }
-      if(isset($_POST['submit'])){
-        $email = htmlspecialchars($_POST['email']);
-        $password = hash('md5', htmlspecialchars($_POST['password']));
-		$firstname = htmlspecialchars($_POST['firstname']);
-		$lastname = htmlspecialchars($_POST['lastname']);
-        $age = htmlspecialchars($_POST['age']);
-        $country = htmlspecialchars($_POST['country']);
-        $zip = htmlspecialchars($_POST['zip']);
-        $phonenumber = htmlspecialchars($_POST['phonenumber']);
-        $usertype = "Customer";
-
-        $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email',' $password', '$firstname', '$lastname', '$country', '$zip', '$phonenumber', '$usertype')";
-        mysqli_query($conn,$sql);
-	  }
-	?> 
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
       <div class="container">
@@ -167,7 +166,7 @@
 			  <div class="field-text">Country</div>
 			  <input type="text" class="form-control" name="country" required>
 			  <div class="field-text">Zip Code</div>
-			  <input type="number" class="form-control" name="zip" required min="97000" max="97999">
+			  <input type="number" class="form-control" name="zip" required>
 			  <div class="field-text">Phone Number</div>
 			  <input type="text" class="form-control" name="phonenumber" required>
               <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Create an account</button>

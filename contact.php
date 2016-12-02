@@ -1,3 +1,7 @@
+<?php
+  include("connect.php");
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -29,6 +33,9 @@
 		margin: 0;
 		margin-left: 95px;
 		margin-top: -30px;
+	  }
+	  body {
+	     background-image: url("images/blue.png");
 	  }
 	</style>
   </head>
@@ -90,6 +97,7 @@
 	</nav>
 	
 	<div class="container">
+	<div class="panel panel-body">
 	<div class="row">
 	  <h1>Contact Form</h1>
 	  <div class="col-md-12">
@@ -164,7 +172,7 @@
       <footer>
         <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
-
+    </div> <!-- /panel -->
     </div> <!-- /container -->
 
 
