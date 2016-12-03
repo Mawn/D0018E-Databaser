@@ -1,6 +1,5 @@
 <?php
   include("session.php");
-  session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +84,7 @@
 		  <?php if(isset($_SESSION['login_user'])): ?>
             <ul class="nav navbar-nav navbar-right">
 		      <li class="dropdown">
-			    <a href="#"><?php $firstname $lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
 			    <ul class="dropdown-menu">
 				  <li>
 				    <a href="settings.php">Settings</a>

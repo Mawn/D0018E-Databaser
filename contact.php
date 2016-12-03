@@ -1,6 +1,5 @@
 <?php
-  include("connect.php");
-  session_start();
+  include("session.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,10 +85,26 @@
               <a href="#">Contact</a>
             </li>
           </ul>
-		  <form class="navbar-form navbar-right">
-			<a href="login.php" class="btn btn-default">Sign in</a>
-			<a href="register.php" class="btn btn-primary">Register</a>
-		  </form>
+		  <?php if(isset($_SESSION['login_user'])): ?>
+            <ul class="nav navbar-nav navbar-right">
+		      <li class="dropdown">
+			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			    <ul class="dropdown-menu">
+				  <li>
+				    <a href="settings.php">Settings</a>
+				  </li>
+				  <li>
+				    <a href="logout.php">Log Out</a>
+				  </li>
+			    </ul>
+			  </li>
+	        </ul>
+          <?php else: ?>
+	        <form class="navbar-form navbar-right">
+			  <a href="login.php" class="btn btn-default">Sign in</a>
+			  <a href="register.php" class="btn btn-primary">Register</a>
+		    </form>
+		  <?php endif ?>
         </div>
         <!-- /.navbar-collapse -->
       </div>

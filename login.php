@@ -14,10 +14,9 @@
     $result = mysqli_query($conn,$sql);
 	$count = mysqli_num_rows($result);
     if($count == 1) {
-      session_register("email");
       $_SESSION['login_user'] = $email;
       header("location: index.php");
-    }else {
+    } else {
       $error = "Your Login Name or Password is invalid";
     }
   }
@@ -138,12 +137,12 @@
         <div class="col-md-4 col-md-offset-4">
 		  <h1 class="header-text"><center>Sign in to DreamTeam</center></h1>
 		  <div class="well well-sm">
-		    <form class="form-signin">
+		    <form class="form-signin" action="" method="post">
 			  <div class="username-text">Email address</div>
-              <input type="email" class="form-control" required autofocus><br>
+              <input type="email" class="form-control" name="email" required autofocus><br>
 			  <div class="password-text">Password</div>
-              <input type="password" class="form-control" required><br>
-              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="login">Sign in</button>
+              <input type="password" class="form-control" name="password" required><br>
+              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submit">Sign in</button>
             </form>
 		  </div>
 		  <div class="well well-md">

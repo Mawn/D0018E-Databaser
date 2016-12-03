@@ -73,7 +73,7 @@
           </ul>
 	      <ul class="nav navbar-nav navbar-right">
 		    <li class="dropdown">
-			  <a href="#"><?php $firstname $lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			  <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
 			  <ul class="dropdown-menu">
 				<li>
 				  <a href="#">Settings</a>
@@ -88,7 +88,12 @@
         <!-- /.navbar-collapse -->
       </div>
       <!-- /.container -->
-	</nav>
+      </nav>
+      <?php if($login_isAdmin): ?>
+        ADMIN AKBAR! hammas is a cunt
+      <?php else: ?>
+        looks like ur a pleb FEELSBAD
+      <?php endif ?>
 	
   </body>
 </html>
