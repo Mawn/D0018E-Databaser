@@ -5,6 +5,20 @@
     mysql_close($connection);
     header('location: index.php');
   }
+  if(isAdmin){
+    $sql = "SELECT id, email, firstname, lastname, usertype from user";
+	$result = mysqli_query($sql, $conn);
+	$i = 0;
+    while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+      $id[$i] = $row['id'];
+      $email[$i] = $row['email'];
+      $firstname[$i] = $row['firstname'];
+      $lastname[$i] = $row['lastname'];
+	  $usertype[$i] = $row['usertype'];
+      $i = $i + 1;
+    }
+    mysqli_free_result($result);
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,10 +32,73 @@
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
+	<script src="settings.js"></script>
 	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-
+      .header-text {
+	    color: #5a5a5a;
+	    font-size: 24px;
+		margin-top: 0px;
+		margin-left: -15px;
+		margin-bottom: 10px;
+      }
+	  .email-text {
+	    color: #5a5a5a;
+		padding-left: 2px;
+		margin-top: 0px;
+		margin-bottom: 3px;
+		font-weight: bold;
+	  }
+	  .field-text {
+	    color: #5a5a5a;
+		padding-left: 2px;
+		margin-bottom: 3px;
+		font-weight: bold;
+	  }
+	  .form-signin .col-md-3{
+	    margin-left: 5%;
+	    width: 90%;
+	  }
+	  .submit {
+	    margin-top: 5px;
+	    margin-bottom: 5px;
+	  }
+	  h2 {
+	    color: #5a5a5a;
+	    font-size: 20px;
+	    margin-top: 0px;
+		margin-bottom: 20px;
+	  }
+      input[type='number'] {
+        -moz-appearance:textfield;
+      }	  
+      input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      }
+	  .form-account {
+        margin-bottom: 10px;
+	  }
+	  hr {
+	    margin-top: 5px;
+		margin-bottom: 10px;
+	  }
+	  .pre-scrollable {
+	    min-height: 702px;
+	    max-height: 702px;
+	  }
+	  .form-admin {
+	    height: 30px;
+	    margin-top: -5px;
+		margin-bottom: -5px;
+	  }
+	  select:-moz-focusring {
+	    color: transparent;
+	    text-shadow: 0 0 0 #000;
+	  }
+	  .glyphicon-remove {
+	    margin-left: 5px;
+	  }
     </style>
   </head>
   <body>
@@ -89,11 +166,87 @@
       </div>
       <!-- /.container -->
       </nav>
-      <?php if($login_isAdmin): ?>
-        ADMIN AKBAR! hammas is a cunt
-      <?php else: ?>
-        looks like ur a pleb FEELSBAD
-      <?php endif ?>
+	  <div class="container">
+	    <div class="row">
+		  <div class="col-md-4">
+		    <h1 class="header-text">Account Settings</h1>
+		  </div>
+		  <div class="col-md-4">
+		    <h1 class="header-text">Admin Settings</h1>
+		  </div>
+		</div>
+		<div class="row">
+          <div class="col-md-4">
+		    <div class="well well-sm">
+		      <form class="form-signin" action="" method="post">
+			    <div class="email-text">Email</div>
+                <input type="email" class="form-control form-account" name="email" value="<?php $login_email ?>" required>
+			    <div class="field-text">Password</div>
+                <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *" required><!--- hunter2? --->
+			    <div class="field-text">First Name</div>
+			    <input type="text" class="form-control form-account" name="firstname" value="<?php $login_firstname ?>" required>
+			    <div class="field-text">Last Name</div>
+			    <input type="text" class="form-control form-account" name="lastname" value="<?php $login_lastname ?>" required>
+			    <div class="field-text">Age</div>
+			    <input type="number" class="form-control form-account" name="age" value="<?php $login_age ?>" min="1" max="110" required>
+			    <div class="field-text">Country</div>
+			    <input type="text" class="form-control form-account" name="country" value="<?php $login_country ?>" required>
+			    <div class="field-text">Zip Code</div>
+			    <input type="number" class="form-control form-account" name="zip" value="<?php $login_zip ?>" required>
+			    <div class="field-text">Phone Number</div>
+			    <input type="text" class="form-control form-account" name="phonenumber" value="<?php $login_phonenumber ?>" required>
+              </form>
+		    </div>
+		    <div class="well well-sm">
+			  <div class="field-text">Current Password</div>
+              <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *" required>
+              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Save Changes</button>
+		    </div>
+		  </div>
+		  <?php if($login_isAdmin): ?>
+		  <div class="col-md-8 col-md-offset-0">
+		    <div class="well well-sm pre-scrollable">
+		      <form class="form-signin" action="" method="post">
+			    <table class="table">
+				  <thead>
+				    <tr>
+					  <th>ID</th>
+					  <th>Email</th>
+					  <th>First Name</th>
+					  <th>Last Name</th>
+					  <th>User Type</th>
+					  <th>Del</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <?php for($j=0; $j<$i; $j++): ?>
+				    <tr>
+					  <td><?php= $id[$j] ?></td>
+					  <td><?php= $email[$j] ?></td>
+					  <td><?php= $firstname[$j] ?></td>
+					  <td><?php= $lastname[$j] ?></td>
+					  <td>
+					    <select class="form-control form-admin" name="admin<?php echo $j ?>">
+						  <?php if($usertype[$j] = Customer): ?>
+						  <option selected="selected">Customer</option>
+						  <option>Admin</option>
+						  <?php else: ?>
+						  <option>Customer</option>
+						  <option selected="selected">Admin</option>
+						  <?php endif ?>
+					    </select>
+					  </td>
+					  <td><a class="removeRow" href="" onclick="<?php echo 'AIDS' ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
+				    </tr>
+					<?php endfor ?>
+				  </tbody>
+                </table>
+              </form>
+		    </div>
+		  </div>
+		<?php endif ?>
+	    </div>
+	  </div>
 	
   </body>
 </html>
