@@ -2,12 +2,11 @@
   include("session.php");
   
   if(!isset($login_email)){
-    mysql_close($connection);
     header('location: index.php');
   }
-  if(isAdmin){
+  if($login_isAdmin){
     $sql = "SELECT id, email, firstname, lastname, usertype from user";
-	$result = mysqli_query($sql, $conn);
+	$result = mysqli_query($conn, $sql);
 	$i = 0;
     while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
       $id[$i] = $row['id'];
@@ -90,6 +89,7 @@
 	  .form-admin {
 	    height: 30px;
 	    margin-top: -5px;
+	    padding-top: 3px; /* For School comp */
 		margin-bottom: -5px;
 	  }
 	  select:-moz-focusring {
@@ -171,36 +171,38 @@
 		  <div class="col-md-4">
 		    <h1 class="header-text">Account Settings</h1>
 		  </div>
+		  <?php if($login_isAdmin): ?>
 		  <div class="col-md-4">
 		    <h1 class="header-text">Admin Settings</h1>
 		  </div>
+		  <?php endif ?>
 		</div>
 		<div class="row">
           <div class="col-md-4">
 		    <div class="well well-sm">
 		      <form class="form-signin" action="" method="post">
 			    <div class="email-text">Email</div>
-                <input type="email" class="form-control form-account" name="email" value="<?php $login_email ?>" required>
+                <input type="email" class="form-control form-account" name="email" value="<?php echo $login_email ?>" required>
 			    <div class="field-text">Password</div>
                 <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *" required><!--- hunter2? --->
 			    <div class="field-text">First Name</div>
-			    <input type="text" class="form-control form-account" name="firstname" value="<?php $login_firstname ?>" required>
+			    <input type="text" class="form-control form-account" name="firstname" value="<?php echo $login_firstname ?>" required>
 			    <div class="field-text">Last Name</div>
-			    <input type="text" class="form-control form-account" name="lastname" value="<?php $login_lastname ?>" required>
+			    <input type="text" class="form-control form-account" name="lastname" value="<?php echo $login_lastname ?>" required>
 			    <div class="field-text">Age</div>
-			    <input type="number" class="form-control form-account" name="age" value="<?php $login_age ?>" min="1" max="110" required>
+			    <input type="number" class="form-control form-account" name="age" value="<?php echo $login_age ?>" min="1" max="110" required>
 			    <div class="field-text">Country</div>
-			    <input type="text" class="form-control form-account" name="country" value="<?php $login_country ?>" required>
+			    <input type="text" class="form-control form-account" name="country" value="<?php echo $login_country ?>" required>
 			    <div class="field-text">Zip Code</div>
-			    <input type="number" class="form-control form-account" name="zip" value="<?php $login_zip ?>" required>
+			    <input type="number" class="form-control form-account" name="zip" value="<?php echo $login_zip ?>" required>
 			    <div class="field-text">Phone Number</div>
-			    <input type="text" class="form-control form-account" name="phonenumber" value="<?php $login_phonenumber ?>" required>
+			    <input type="text" class="form-control form-account" name="phonenumber" value="<?php echo $login_phonenumber ?>" required>
               </form>
 		    </div>
 		    <div class="well well-sm">
 			  <div class="field-text">Current Password</div>
               <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *" required>
-              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Save Changes</button>
+              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Save Account Changes</button>
 		    </div>
 		  </div>
 		  <?php if($login_isAdmin): ?>
@@ -221,13 +223,13 @@
 				  <tbody>
 				    <?php for($j=0; $j<$i; $j++): ?>
 				    <tr>
-					  <td><?php= $id[$j] ?></td>
-					  <td><?php= $email[$j] ?></td>
-					  <td><?php= $firstname[$j] ?></td>
-					  <td><?php= $lastname[$j] ?></td>
+					  <td><?php echo $id[$j] ?></td>
+					  <td><?php echo $email[$j] ?></td>
+					  <td><?php echo $firstname[$j] ?></td>
+					  <td><?php echo $lastname[$j] ?></td>
 					  <td>
 					    <select class="form-control form-admin" name="admin<?php echo $j ?>">
-						  <?php if($usertype[$j] = Customer): ?>
+						  <?php if($usertype[$j] == 'Customer'): ?>
 						  <option selected="selected">Customer</option>
 						  <option>Admin</option>
 						  <?php else: ?>
@@ -236,7 +238,7 @@
 						  <?php endif ?>
 					    </select>
 					  </td>
-					  <td><a class="removeRow" href="" onclick="<?php echo 'AIDS' ?>"><span class="glyphicon glyphicon-remove"></span></a></td>
+					  <td><a class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
 				    </tr>
 					<?php endfor ?>
 				  </tbody>
