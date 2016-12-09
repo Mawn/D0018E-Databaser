@@ -228,7 +228,7 @@
 					  <td><?php echo $firstname[$j] ?></td>
 					  <td><?php echo $lastname[$j] ?></td>
 					  <td>
-					    <select class="form-control form-admin" name="admin<?php echo $j ?>">
+					    <select class="form-control form-admin" name="admin">
 						  <?php if($usertype[$j] == 'Customer'): ?>
 						  <option selected="selected">Customer</option>
 						  <option>Admin</option>
@@ -238,7 +238,7 @@
 						  <?php endif ?>
 					    </select>
 					  </td>
-					  <td><a class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+					  <td><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
 				    </tr>
 					<?php endfor ?>
 				  </tbody>
