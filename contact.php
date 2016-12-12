@@ -8,7 +8,7 @@
     <title>Contact Us - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type='text/javascript' src="https://imsky.github.io/holder/holder.js"></script>
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -90,6 +90,9 @@
 		      <li class="dropdown">
 			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
 			    <ul class="dropdown-menu">
+			    <li>
+			    	<a href="orders.php">Orders</a>
+			    </li>
 				  <li>
 				    <a href="settings.php">Settings</a>
 				  </li>
@@ -185,7 +188,7 @@
 
       <!-- FOOTER -->
       <footer>
-        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias.</p>
       </footer>
     </div> <!-- /panel -->
     </div> <!-- /container -->

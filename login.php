@@ -12,9 +12,12 @@
 	
     $sql = "SELECT id FROM user WHERE email = '$email' and password = '$password'";
     $result = mysqli_query($conn,$sql);
-	$count = mysqli_num_rows($result);
+    $row = mysqli_fetch_assoc($result);
+    $id = $row['id'];
+    $count = mysqli_num_rows($result);
+    mysqli_free_result($result);
     if($count == 1) {
-      $_SESSION['login_user'] = $email;
+      $_SESSION['login_user'] = $id;
       header("location: index.php");
     } else {
       $error = "Your Login Name or Password is invalid";
@@ -30,7 +33,7 @@
     <title>Sign in - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type='text/javascript' src="https://imsky.github.io/holder/holder.js"></script>
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -41,31 +44,31 @@
 	  .header-text {
 	    color: #5a5a5a;
 	    font-size: 24px;
-		margin-bottom: 20px;
-      }
+		  margin-bottom: 20px;
+    }
 	  .username-text {
 	    color: #5a5a5a;
-		padding-left: 2px;
-		margin-top: 10px;
-		margin-bottom: 5px;
-		font-weight: bold;
+		  padding-left: 2px;
+		  margin-top: 10px;
+		  margin-bottom: 5px;
+		  font-weight: bold;
 	  }
 	  .password-text {
 	    color: #5a5a5a;
-		padding-left: 2px;
-		margin-bottom: 5px;
-		font-weight: bold;
+		  padding-left: 2px;
+		  margin-bottom: 5px;
+		  font-weight: bold;
 	  }
 	  .signup-text {
 	    color: #5a5a5a;
-		padding-left: 15px;
-		font-weight: bold;
+		  padding-left: 15px;
+		  font-weight: bold;
 	  }
 	  footer {
-        position: absolute;
-        bottom: 0;
-		left: 38.5%;
-      }
+      position: absolute;
+      bottom: 0;
+		  left: 42%;
+    }
 	  .form-signin {
 	    margin-left: 5%;
 	    width: 90%;
@@ -153,7 +156,7 @@
 
       <!-- FOOTER -->
       <footer>
-        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias.</p>
       </footer>
 
     </div> 

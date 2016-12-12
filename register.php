@@ -8,7 +8,7 @@
   
   if(isset($_POST['submit'])){
     $email = htmlspecialchars($_POST['email']);
-    $password = hash('md5', htmlspecialchars($_POST['password']));
+    $password = hash('md5',htmlspecialchars($_POST['password']));
     $firstname = htmlspecialchars($_POST['firstname']);
 	$lastname = htmlspecialchars($_POST['lastname']);
     $age = htmlspecialchars($_POST['age']);
@@ -28,7 +28,7 @@
     if($count == 1) {
       $error = "Email already belongs to another account.";
     } else {
-      $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email',' $password', '$firstname', '$lastname', '$age', '$country', '$zip', '$phonenumber', '$usertype')";
+      $sql = "INSERT INTO user (email, password, firstname, lastname, age, country, zip, phonenumber, usertype) VALUES ('$email', '$password', '$firstname', '$lastname', '$age', '$country', '$zip', '$phonenumber', '$usertype')";
       mysqli_query($conn, $sql);
     }
   }
@@ -40,7 +40,7 @@
     <title>Register - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type='text/javascript' src="https://imsky.github.io/holder/holder.js"></script>
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -51,32 +51,32 @@
 	  .header-text {
 	    color: #5a5a5a;
 	    font-size: 24px;
-		margin-top: 0px;
-		margin-bottom: 10px;
-      }
+		  margin-top: 0px;
+		  margin-bottom: 10px;
+    }
 	  .email-text {
 	    color: #5a5a5a;
-		padding-left: 2px;
-		margin-top: 10px;
-		margin-bottom: 3px;
-		font-weight: bold;
+		  padding-left: 2px;
+		  margin-top: 10px;
+		  margin-bottom: 3px;
+		  font-weight: bold;
 	  }
 	  .field-text {
 	    color: #5a5a5a;
-		padding-left: 2px;
-		margin-bottom: 3px;
-		font-weight: bold;
+		  padding-left: 2px;
+		  margin-bottom: 3px;
+		  font-weight: bold;
 	  }
 	  .signin-text {
 	    color: #5a5a5a;
-		padding-left: 35px;
-		font-weight: bold;
+		  padding-left: 35px;
+		  font-weight: bold;
 	  }
 	  footer {
-        position: absolute;
-        bottom: 0;
-		left: 38.5%;
-      }
+      position: absolute;
+      bottom: 0;
+		  left: 42%;
+    }
 	  .form-signin {
 	    margin-left: 5%;
 	    width: 90%;
@@ -89,16 +89,16 @@
 	    color: #5a5a5a;
 	    font-size: 20px;
 	    margin-top: 0px;
-		margin-bottom: 20px;
+		  margin-bottom: 20px;
 	  }
-      input[type='number'] {
-        -moz-appearance:textfield;
-      }	  
-      input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-      }
+    input[type='number'] {
+      -moz-appearance:textfield;
+    }	  
+    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
 	  .form-control {
-        margin-bottom: 10px;
+      margin-bottom: 10px;
 	  }
     </style>
   </head>
@@ -192,7 +192,7 @@
 
       <!-- FOOTER -->
       <footer>
-        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias.</p>
       </footer>
 
     </div>

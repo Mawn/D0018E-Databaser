@@ -8,7 +8,7 @@
     <title>DreamTeam Luleå - The Best E-Commerce Store</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type='text/javascript' src="https://imsky.github.io/holder/holder.js"></script>
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -82,10 +82,13 @@
             </li>
           </ul>
 		  <?php if(isset($_SESSION['login_user'])): ?>
-            <ul class="nav navbar-nav navbar-right">
-		      <li class="dropdown">
+      <ul class="nav navbar-nav navbar-right">
+		    <li class="dropdown">
 			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
 			    <ul class="dropdown-menu">
+			    <li>
+			    	<a href="orders.php">Orders</a>
+			    </li>
 				  <li>
 				    <a href="settings.php">Settings</a>
 				  </li>
@@ -94,7 +97,7 @@
 				  </li>
 			    </ul>
 			  </li>
-	        </ul>
+	    </ul>
           <?php else: ?>
 	        <form class="navbar-form navbar-right">
 			  <a href="login.php" class="btn btn-default">Sign in</a>
@@ -123,12 +126,21 @@
 		  <div class="container">
 		    <div class="carousel-caption">
 			  <div class="col-md-12">
+			    <?php if(isset($_SESSION['login_user'])): ?>
+			    <h2 class="carouseltext">Welcome to DreamTeam Luleå, <?php echo $login_firstname ?>!</h2>
+				  <p>View your orders or change your account settings here!</p>
+				  <div>
+            <a class="btn btn-primary btn-min-block btn-theme" href="settings.php">Settings</a>
+				    <a class="btn btn-default btn-min-block btn-theme" href="orders.php">Orders</a>
+				  </div>
+				  <?php else: ?>
 			    <h2 class="carouseltext">Welcome to DreamTeam Luleå!</h2>
-				<p>Login or register an account for free!</p>
-				<div>
-                  <a class="btn btn-primary btn-min-block btn-theme" href="login.php">Login</a>
-				  <a class="btn btn-default btn-min-block btn-theme" href="register.php">Register</a>
-				</div>
+				  <p>Login or register an account for free!</p>
+				  <div>
+            <a class="btn btn-primary btn-min-block btn-theme" href="login.php">Login</a>
+				    <a class="btn btn-default btn-min-block btn-theme" href="register.php">Register</a>
+				  </div>
+				  <?php endif ?>
 			  </div>
 			</div>
 		  </div>
@@ -178,7 +190,7 @@
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias.</p>
       </footer>
 
     </div> 

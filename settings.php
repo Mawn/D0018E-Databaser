@@ -4,16 +4,72 @@
   if(!isset($login_email)){
     header('location: index.php');
   }
+  if(isset($_POST['submit'])){
+    $accountemail = htmlspecialchars($_POST['email']);
+    $accountpassword = hash('md5',htmlspecialchars($_POST['password']));
+    $accountfirstname = htmlspecialchars($_POST['firstname']);
+	  $accountlastname = htmlspecialchars($_POST['lastname']);
+    $accountage = htmlspecialchars($_POST['age']);
+    $accountcountry = htmlspecialchars($_POST['country']);
+    $accountzip = htmlspecialchars($_POST['zip']);
+    $accountphonenumber = htmlspecialchars($_POST['phonenumber']);
+    $currentpassword = hash('md5',htmlspecialchars($_POST['currentpassword']));
+    
+    if($currentpassword == $login_password){
+    	$sql = "SELECT * FROM user WHERE email = '$accountemail' AND NOT email = '$login_email'";
+	    $result = mysqli_query($conn, $sql);
+	    if (!$result){
+	      $count = 0;
+      } else { 
+        $count = mysqli_num_rows($result);
+	      mysqli_free_result($result);
+	    }
+      if($count == 1) {
+        $error = "Email already belongs to another account.";
+      } else {
+      	if(empty($_POST['email'])){
+      		$accountemail = $login_email;
+      	} else if(empty($_POST['password'])){
+          $accountpassword = $login_password;
+      	} else if(empty($_POST['firstname'])){
+      		$accountfirstname = $login_firstname;
+      	} else if(empty($_POST['lastname'])){
+      		$accountlastname = $login_lastname;
+      	} else if(empty($_POST['age'])){
+      		$accountage = $login_age;
+      	} else if(empty($_POST['country'])){
+      		$accountcountry = $login_country;
+      	} else if(empty($_POST['zip'])){
+      		$accountzip = $login_zip;
+      	} else if(empty($_POST['phonenumber'])){
+      		$accountphonenumber = $login_phonenumber;
+      	}
+        $sql = "UPDATE user SET email='$accountemail', password='$accountpassword', firstname='$accountfirstname', lastname='$accountlastname', age='$accountage',
+        country='$accountcountry', zip='$accountzip', phonenumber='$accountphonenumber' WHERE email ='$login_email'";
+        mysqli_query($conn, $sql);
+        $login_email = $accountemail;
+        $login_firstname = $accountfirstname;
+        $login_lastname = $accountlastname;
+        $login_age = $accountage;
+        $login_country = $accountcountry;
+        $login_zip = $accountzip;
+        $login_phonenumber = $accountphonenumber;
+      }
+    } else {
+    	$error = "Passwords did not match.";
+    }
+  	
+  }
   if($login_isAdmin){
     $sql = "SELECT id, email, firstname, lastname, usertype from user";
-	$result = mysqli_query($conn, $sql);
-	$i = 0;
+	  $result = mysqli_query($conn, $sql);
+	  $i = 0;
     while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
       $id[$i] = $row['id'];
       $email[$i] = $row['email'];
       $firstname[$i] = $row['firstname'];
       $lastname[$i] = $row['lastname'];
-	  $usertype[$i] = $row['usertype'];
+      $usertype[$i] = $row['usertype'];
       $i = $i + 1;
     }
     mysqli_free_result($result);
@@ -26,7 +82,7 @@
     <title>Account Settings - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script type='text/javascript' src="https://imsky.github.io/holder/holder.js"></script>
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -118,7 +174,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li>
 			  <a href="index.php">Home</a>
 			</li>
 		    <li class="dropdown">
@@ -149,9 +205,12 @@
             </li>
           </ul>
 	      <ul class="nav navbar-nav navbar-right">
-		    <li class="dropdown">
+		    <li class="dropdown active">
 			  <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
 			  <ul class="dropdown-menu">
+			  <li>
+			    	<a href="orders.php">Orders</a>
+			  </li>
 				<li>
 				  <a href="#">Settings</a>
 				</li>
@@ -178,38 +237,37 @@
 		  <?php endif ?>
 		</div>
 		<div class="row">
-          <div class="col-md-4">
-		    <div class="well well-sm">
-		      <form class="form-signin" action="" method="post">
-			    <div class="email-text">Email</div>
-                <input type="email" class="form-control form-account" name="email" value="<?php echo $login_email ?>" required>
-			    <div class="field-text">Password</div>
-                <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *" required><!--- hunter2? --->
-			    <div class="field-text">First Name</div>
-			    <input type="text" class="form-control form-account" name="firstname" value="<?php echo $login_firstname ?>" required>
-			    <div class="field-text">Last Name</div>
-			    <input type="text" class="form-control form-account" name="lastname" value="<?php echo $login_lastname ?>" required>
-			    <div class="field-text">Age</div>
-			    <input type="number" class="form-control form-account" name="age" value="<?php echo $login_age ?>" min="1" max="110" required>
-			    <div class="field-text">Country</div>
-			    <input type="text" class="form-control form-account" name="country" value="<?php echo $login_country ?>" required>
-			    <div class="field-text">Zip Code</div>
-			    <input type="number" class="form-control form-account" name="zip" value="<?php echo $login_zip ?>" required>
-			    <div class="field-text">Phone Number</div>
-			    <input type="text" class="form-control form-account" name="phonenumber" value="<?php echo $login_phonenumber ?>" required>
-              </form>
-		    </div>
-		    <div class="well well-sm">
-			  <div class="field-text">Current Password</div>
-              <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *" required>
-              <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Save Account Changes</button>
-		    </div>
+      <div class="col-md-4">
+		    <form class="form-signin" action="" method="post">
+		      <div class="well well-sm">
+			      <div class="email-text">Email</div>
+            <input type="email" class="form-control form-account" name="email" value="<?php echo $login_email ?>" required>
+			      <div class="field-text">Password</div>
+            <input type="password" class="form-control form-account" name="password" placeholder="* * * * * * * * *"><!--- hunter2? --->
+			      <div class="field-text">First Name</div>
+			      <input type="text" class="form-control form-account" name="firstname" value="<?php echo $login_firstname ?>">
+			      <div class="field-text">Last Name</div>
+			      <input type="text" class="form-control form-account" name="lastname" value="<?php echo $login_lastname ?>">
+			      <div class="field-text">Age</div>
+			      <input type="number" class="form-control form-account" name="age" value="<?php echo $login_age ?>" min="1" max="110">
+			      <div class="field-text">Country</div>
+			      <input type="text" class="form-control form-account" name="country" value="<?php echo $login_country ?>">
+			      <div class="field-text">Zip Code</div>
+			      <input type="number" class="form-control form-account" name="zip" value="<?php echo $login_zip ?>">
+			      <div class="field-text">Phone Number</div>
+			      <input type="text" class="form-control form-account" name="phonenumber" value="<?php echo $login_phonenumber ?>">
+		      </div>
+		      <div class="well well-sm">
+			      <div class="field-text">Current Password</div>
+            <input type="password" class="form-control form-account" name="currentpassword" placeholder="* * * * * * * * *" required>
+            <button class="btn btn-md btn-primary btn-block submit" type="submit" name="submit" value="submitform">Save Account Changes</button>
+		      </div>
+		    </form>
 		  </div>
 		  <?php if($login_isAdmin): ?>
 		  <div class="col-md-8 col-md-offset-0">
 		    <div class="well well-sm pre-scrollable">
-		      <form class="form-signin" action="" method="post">
-			    <table class="table">
+		      <table class="table">
 				  <thead>
 				    <tr>
 					  <th>ID</th>
@@ -224,11 +282,11 @@
 				    <?php for($j=0; $j<$i; $j++): ?>
 				    <tr>
 					  <td><?php echo $id[$j] ?></td>
-					  <td><?php echo $email[$j] ?></td>
+					  <td class="email"><?php echo $email[$j] ?></td>
 					  <td><?php echo $firstname[$j] ?></td>
 					  <td><?php echo $lastname[$j] ?></td>
 					  <td>
-					    <select class="form-control form-admin" name="admin">
+					    <select class="form-control form-admin selection" <?php if($id[$j] == $login_id):echo 'disabled'; endif ?>>
 						  <?php if($usertype[$j] == 'Customer'): ?>
 						  <option selected="selected">Customer</option>
 						  <option>Admin</option>
@@ -238,12 +296,13 @@
 						  <?php endif ?>
 					    </select>
 					  </td>
+					  <?php if(!($id[$j] == $login_id)): ?>
 					  <td><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+					  <?php endif ?>
 				    </tr>
-					<?php endfor ?>
+					  <?php endfor ?>
 				  </tbody>
-                </table>
-              </form>
+          </table>
 		    </div>
 		  </div>
 		<?php endif ?>
