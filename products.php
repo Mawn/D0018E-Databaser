@@ -38,6 +38,7 @@
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
+	<script src="products.js"></script>
 	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
@@ -122,39 +123,42 @@
 			  </ul>
 			</li>
 			<li>
-              <a href="about.php">About</a>
-            </li>
-            <li>
-              <a href="contact.php">Contact</a>
-            </li>
-          </ul>
-	      <?php if(isset($_SESSION['login_user'])): ?>
-            <ul class="nav navbar-nav navbar-right">
+        <a href="about.php">About</a>
+      </li>
+      <li>
+        <a href="contact.php">Contact</a>
+      </li>
+    </ul>
+	    <?php if(isset($_SESSION['login_user'])): ?>
+        <ul class="nav navbar-nav navbar-right">
 		      <li class="dropdown">
-			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
-			    <ul class="dropdown-menu">
-			    <li>
-			    	<a href="orders.php">Orders</a>
+			      <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			      <ul class="dropdown-menu">
+			        <li>
+			    	    <a href="orders.php">Orders</a>
+			        </li>
+				      <li>
+				        <a href="settings.php">Settings</a>
+				      </li>
+				      <li>
+				        <a href="logout.php">Log Out</a>
+				      </li>
+			      </ul>
 			    </li>
-				  <li>
-				    <a href="settings.php">Settings</a>
-				  </li>
-				  <li>
-				    <a href="logout.php">Log Out</a>
-				  </li>
-			    </ul>
-			  </li>
-	        </ul>
-          <?php else: ?>
-	        <form class="navbar-form navbar-right">
-			  <a href="login.php" class="btn btn-default">Sign in</a>
-			  <a href="register.php" class="btn btn-primary">Register</a>
+			    <li>
+				    <a href="cart.php">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
+			    </li>
+	      </ul>
+      <?php else: ?>
+	      <form class="navbar-form navbar-right">
+			    <a href="login.php" class="btn btn-default">Sign in</a>
+			    <a href="register.php" class="btn btn-primary">Register</a>
 		    </form>
 		  <?php endif ?>
         </div>
       </div>
 	</nav>
-	
+	  <div class="userid" style="display:none"><?php echo $login_id ?></div>
     <div class="container">
       <div class="container-fluid">
         <div class="row content">
@@ -225,11 +229,12 @@
 			</div>
 			<?php for($j=0;$j<$i;$j++): ?>
 			  <div class="col-sm-4">
+			  	<div class="productid" style="display:none"><?php echo $prodid[$j] ?></div>
 			    <div class="well well-sm">
 				  <img class="img-thumbnail" src="<?= $prodimageurl[$j] ?>" height="240" width="240">
 				  <p><strong><?= $prodname[$j] ?></strong></p>
-				  <p><?= $prodprice[$j] ?></p>
-				  <button class="btn btn-block btn-primary">Add to Cart</button>
+				  <p><?= $prodprice[$j] ?> SEK</p>
+				  <button class="btn btn-block btn-primary add">Add to Cart</button>
 			    </div>
 			  </div>
 			<?php endfor ?>

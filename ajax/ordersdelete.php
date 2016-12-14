@@ -1,9 +1,9 @@
 <?php
   include("../connect.php");
   if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'){
-    $email = $_POST['email'];
-    $type = $_POST['type'];
-    $sql = "UPDATE user SET usertype = '$type' WHERE email = '$email'";
+    $userid = $_POST['userid'];
+    $productid = $_POST['orderid'];
+    $sql = "DELETE FROM orders WHERE userid = '$userid' and productid = '$orderid'";
     mysqli_query($conn, $sql);
   }
 ?>

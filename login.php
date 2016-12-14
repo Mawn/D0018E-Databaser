@@ -9,7 +9,6 @@
   if(isset($_POST['submit'])){
     $email = htmlspecialchars($_POST['email']);
     $password = hash('md5', htmlspecialchars($_POST['password']));
-	
     $sql = "SELECT id FROM user WHERE email = '$email' and password = '$password'";
     $result = mysqli_query($conn,$sql);
     $row = mysqli_fetch_assoc($result);
@@ -96,7 +95,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li>
 			  <a href="index.php">Home</a>
 			</li>
 		    <li class="dropdown">

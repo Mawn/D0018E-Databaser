@@ -64,22 +64,25 @@
             </li>
           </ul>
 	      <?php if(isset($_SESSION['login_user'])): ?>
-            <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
 		      <li class="dropdown">
-			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
-			    <ul class="dropdown-menu">
-			    <li>
-			    	<a href="orders.php">Orders</a>
+			      <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			      <ul class="dropdown-menu">
+			        <li>
+			    	    <a href="orders.php">Orders</a>
+			        </li>
+				      <li>
+				        <a href="settings.php">Settings</a>
+				      </li>
+				      <li>
+				        <a href="logout.php">Log Out</a>
+				      </li>
+			      </ul>
 			    </li>
-				  <li>
-				    <a href="settings.php">Settings</a>
-				  </li>
-				  <li>
-				    <a href="logout.php">Log Out</a>
-				  </li>
-			    </ul>
-			  </li>
-	        </ul>
+			    <li>
+				    <a href="cart.php">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
+			    </li>
+	      </ul>
           <?php else: ?>
 	        <form class="navbar-form navbar-right">
 			  <a href="login.php" class="btn btn-default">Sign in</a>

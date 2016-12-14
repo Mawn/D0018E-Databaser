@@ -154,6 +154,7 @@
 	  }
 	  .glyphicon-remove {
 	    margin-left: 5px;
+	    font-size: 1.25em;
 	  }
     </style>
   </head>
@@ -205,20 +206,23 @@
             </li>
           </ul>
 	      <ul class="nav navbar-nav navbar-right">
-		    <li class="dropdown active">
-			  <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
-			  <ul class="dropdown-menu">
-			  <li>
-			    	<a href="orders.php">Orders</a>
-			  </li>
-				<li>
-				  <a href="#">Settings</a>
-				</li>
-				<li>
-				  <a href="logout.php">Log Out</a>
-				</li>
-			  </ul>
-			</li>
+		      <li class="dropdown active">
+			      <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			      <ul class="dropdown-menu">
+			        <li>
+			    	    <a href="orders.php">Orders</a>
+			        </li>
+				      <li>
+				        <a href="#">Settings</a>
+				      </li>
+				      <li>
+				        <a href="logout.php">Log Out</a>
+				      </li>
+			      </ul>
+			    </li>
+			    <li>
+				    <a href="cart.php">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
+			    </li>
 	      </ul>
         </div>
         <!-- /.navbar-collapse -->

@@ -22,4 +22,7 @@
   } else {
     $login_isAdmin = false;
   }
+  $query = mysqli_query($conn, "SELECT * FROM cart WHERE userid='$user_check'");
+  $login_numofitems = mysqli_num_rows($query);
 ?>
+

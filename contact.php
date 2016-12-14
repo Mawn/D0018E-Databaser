@@ -34,7 +34,15 @@
 		margin-top: -30px;
 	  }
 	  body {
-	     background-image: url("images/blue.png");
+	     background-image: url("images/Blue.png");
+	  }
+	  footer {
+	  	margin-left: 30px;
+	  	position: absolute;
+	  	bottom: 75px;
+	  }
+	  .panel {
+	  	min-height: 85vh;
 	  }
 	</style>
   </head>
@@ -86,26 +94,29 @@
             </li>
           </ul>
 		  <?php if(isset($_SESSION['login_user'])): ?>
-            <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav navbar-right">
 		      <li class="dropdown">
-			    <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
-			    <ul class="dropdown-menu">
-			    <li>
-			    	<a href="orders.php">Orders</a>
+			      <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
+			      <ul class="dropdown-menu">
+			        <li>
+			    	    <a href="orders.php">Orders</a>
+			        </li>
+				      <li>
+				        <a href="settings.php">Settings</a>
+				      </li>
+				      <li>
+				        <a href="logout.php">Log Out</a>
+				      </li>
+			      </ul>
 			    </li>
-				  <li>
-				    <a href="settings.php">Settings</a>
-				  </li>
-				  <li>
-				    <a href="logout.php">Log Out</a>
-				  </li>
-			    </ul>
-			  </li>
-	        </ul>
-          <?php else: ?>
-	        <form class="navbar-form navbar-right">
-			  <a href="login.php" class="btn btn-default">Sign in</a>
-			  <a href="register.php" class="btn btn-primary">Register</a>
+			    <li>
+				    <a href="cart.php">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
+			    </li>
+	      </ul>
+      <?php else: ?>
+	      <form class="navbar-form navbar-right">
+			    <a href="login.php" class="btn btn-default">Sign in</a>
+			    <a href="register.php" class="btn btn-primary">Register</a>
 		    </form>
 		  <?php endif ?>
         </div>
@@ -119,13 +130,13 @@
 	<div class="row">
 	  <h1>Contact Form</h1>
 	  <div class="col-md-12">
-		<div class="alert alert-success">
+		<!---<div class="alert alert-success">
 		  <strong><span class="glyphicon glyphicon-ok"></span> Success! Message sent. (If form ok!)</strong>
 		</div>	  
 		<div class="alert alert-danger">
 		  <span class="glyphicon glyphicon-remove"></span><strong> Error! Please check the inputs. (If form error!)</strong>
 		</div>
-	  </div>
+	  </div>-->
 	  <form role="form" action="" method="post" >
 		<div class="col-lg-6">
 		  <div class="well well-sm">
