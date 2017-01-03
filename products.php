@@ -42,44 +42,44 @@
 	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
-	/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 340px}
+	  /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 340px} /* 340 default */
     
     /* Set gray background color and 100% height */
-	.container{
-		padding-left: 23px;
-	}
+	  .container{
+		  padding-left: 23px;
+	  }
     .sidenav {
-	  margin-top: 20px;
+	    margin-top: 20px;
       background-color: #f5f5f5;
       height: 100%;
-	  border-color: #ffffff;
-	  border: 1px solid #e3e3e3;
-	  border-radius: 3px;
-	  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
-			  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+	    border-color: #ffffff;
+	    border: 1px solid #e3e3e3;
+	    border-radius: 3px;
+	    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
     }
-	.carousel {
-	  height: 340px;
-	  margin-bottom: 60px;
-	}
-	.carousel .item {
-	  height: 340px;
-	  background-color: #777;
-	}
-	.carousel-inner > .item > img {
-	  position: absolute;
-	  top: 0;
-	  left: 0;
-	  min-width: 40%;
-	  height: 340px;
-	}
-	.carousel-inner > .item > img, .carousel-inner > .item > a > img {
-	  height: 100%;
-	}
-	.carouseltext {
-		margin-bottom: 40px;
-	}
+	  .carousel {
+	    height: 340px;
+	    margin-bottom: 60px;
+	  }
+	  .carousel .item {
+	    height: 340px;
+	    background-color: #777;
+	  }
+	  .carousel-inner > .item > img {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    min-width: 40%;
+	    height: 340px;
+	  }
+	  .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+	    height: 100%;
+	  }
+	  .carouseltext {
+		  margin-bottom: 40px;
+	  }
 	</style>
   </head>
   <body>
@@ -161,15 +161,22 @@
 	  <div class="userid" style="display:none"><?php echo $login_id ?></div>
     <div class="container">
       <div class="container-fluid">
-        <div class="row content">
+        <div class="row content" <?php if($login_isAdmin): ?>style="height: 500px;"<?php endif ?>>
           <div class="col-sm-3 sidenav hidden-xs">
             <h2>Products</h2>
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#">All Products</a></li>
-			  <?php for($n=0;$n<$k;$n++): ?>
-				<li><a href="products/<?= $caturl[$n] ?>"><?= $catname[$n] ?></a></li>
-		      <?php endfor ?>
+						  <?php for($n=0;$n<$k;$n++): ?>
+							<li><a href="products/<?= $caturl[$n] ?>"><?= $catname[$n] ?></a></li>
+				      <?php endfor ?>
             </ul><br>
+            <?php if($login_isAdmin): ?>
+            <h2>Admin Panel</h2>
+            <ul class="nav nav-pills nav-stacked">
+            	<li class="active"><a href="#">Product View</a></li>
+            	<li><a href="productsadmin.php">Admin View</a></li>
+            </ul>
+            <?php endif ?>
           </div>
           <br>
 		  <div class="col-sm-9">
@@ -234,7 +241,9 @@
 				  <img class="img-thumbnail" src="<?= $prodimageurl[$j] ?>" height="240" width="240">
 				  <p><strong><?= $prodname[$j] ?></strong></p>
 				  <p><?= $prodprice[$j] ?> SEK</p>
+				  <?php if(isset($_SESSION['login_user'])): ?>
 				  <button class="btn btn-block btn-primary add">Add to Cart</button>
+				  <?php endif ?>
 			    </div>
 			  </div>
 			<?php endfor ?>

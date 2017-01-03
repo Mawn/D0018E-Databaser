@@ -4,41 +4,35 @@
   if(!isset($login_email)){
     header('location: index.php');
   }
-  /*$sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,1,4)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,3,3)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,6,1)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,10,5)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,15,2)";
-  mysqli_query($conn, $sql);*/
-  $sql = "SELECT * FROM cart WHERE userid = '$login_id'";
+  if(!$login_isAdmin){
+  	header('location: index.php');
+  }
+  
+  $sql = "SELECT * from orders";
   $result = mysqli_query($conn, $sql);
-  $i = 0;
+  $k = 0;
   while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
-    $productid[$i] = $row['productid'];
-    $amount[$i] = $row['amount'];
-    $i = $i + 1;
+  	$ordid[$k] = $row['id'];
+  	$ordemail[$k] = $row['email'];
+  	$ordtotalprice[$k] = $row['totalprice'];
+  	$ordstatus[$k] = $row['status'];
+  	$ordshippingname[$k] = $row['shippingname'];
+  	$ordshippingaddress[$k] = $row['shippingaddress'];
+  	$ordshippingcountry[$k] = $row['country'];
+  	$ordshippingzip[$k] = $row['zip'];
+  	$ordsql = "SELECT * from item WHERE orderid = '$ordid[$k]'";
+  	$orderresult = mysqli_query($conn, $ordsql);
+  	$ordnumitems[$k] = mysqli_num_rows($orderresult);
+  	mysqli_free_result($orderresult);
+  	$k = $k + 1;
   }
   mysqli_free_result($result);
-  for($j=0; $j<$i; $j++){
-    $sql = "SELECT name, price, stock, imageurl FROM products WHERE id = '$productid[$j]'";
-    $result = mysqli_query($conn, $sql);
-    $row = mysqli_fetch_array($result, MYSQL_ASSOC);
-    $productname[$j] = $row['name'];
-    $productprice[$j] = $row['price'];
-    $productstock[$j] = $row['stock'];
-    $productimageurl[$j] = $row['imageurl'];
-    mysqli_free_result($result);
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Your Cart - DreamTeam Luleå</title>
+    <title>Orders - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -46,7 +40,7 @@
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
-	<script src="cart.js"></script>
+	<script src="orders.js"></script>
 	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
@@ -65,7 +59,7 @@
 	  	min-height: 72vh;
 	  }
 	  .glyphicon-remove {
-	    margin-left: 5px;
+	    margin-left: 15px;
 	    font-size: 1.5em;
 	  }
   </style>
@@ -118,11 +112,11 @@
             </li>
           </ul>
 	      <ul class="nav navbar-nav navbar-right">
-		      <li class="dropdown">
+		      <li class="dropdown active">
 			      <a href="#"><?php echo $login_firstname." ". $login_lastname ?> <small><span class="glyphicon glyphicon-cog"></span></small></a>
 			      <ul class="dropdown-menu">
 			        <li>
-			    	    <a href="orders.php">Orders</a>
+			    	    <a href="#">Orders</a>
 			        </li>
 				      <li>
 				        <a href="settings.php">Settings</a>
@@ -132,71 +126,76 @@
 				      </li>
 			      </ul>
 			    </li>
-			    <li class="active">
-				    <a href="#">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
+			    <li>
+				    <a href="cart.php">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
 			    </li>
 	      </ul>
-      </div>
+        </div>
         <!-- /.navbar-collapse -->
-    </div>
+      </div>
       <!-- /.container -->
-  </nav>
-    <div class="userid" style="display:none"><?php echo $login_id ?></div>
+      </nav>
+		<div class="userid" style="display:none"><?php echo $login_id ?></div>
 	  <div class="container">
 	  	<div class="row">
-	  		<div class="col-md-8 col-md-offset-2">
+	  		<div class="col-md-2">
+	  			<div class="panel panel-default" style="height: 115px;">
+	  				<div class="panel-body">
+						  <ul class="nav nav-pills nav-stacked">
+						    <li><a href="orders.php">Your Orders</a></li>
+						    <li class="active"><a href="#">All Orders</a></li>
+						  </ul>
+	  				</div>
+	  			</div>
+				</div>
+	  		<div class="col-md-8 col-md-offset-0">
 	  			<div class="panel panel-default">
-					  <div class="panel-heading">Your Shopping Cart</div>
+					  <div class="panel-heading">All Orders (Admin View)</div>
 					  <div class="panel-body pre-scrollable">
 					    <table class="table">
 							  <thead>
 							    <tr>
-								  <th style="text-align: center;">Image</th>
-								  <th>Name</th>
-								  <th>Quantity</th>
-								  <th>Price</th>
-								  <th>Del</th>
+								  <th class="col-md-2">ID #</th>
+								  <th class="col-md-2">Email</th>
+								  <th class="col-md-2">Order Status</th>
+								  <th class="col-md-2">Total Price</th>
+								  <th class="col-md-2">Items</th>
+								  <th class="col-md-2">Cancel</th>
 							    </tr>
 							  </thead>
 							  <tbody>
-							  <?php for($n=0; $n<$i; $n++): ?>
+							  <?php for($n=0; $n<$k; $n++): ?>
 							    <tr>
-							    	<td style="max-width: 100px;">
-							    		<center><img src="<?php echo $productimageurl[$n] ?>" height="96px" width="150px"></img></center>
+							    	<td class="col-md-1 orderid"><?php echo $ordid[$n] ?></td>
+							    	<td class="col-md-4"><?php echo $ordemail[$n] ?></td>
+							    	<td class="col-md-2">
+							    		<select class="selection">
+											  <?php if($ordstatus[$n] == 'Pending'): ?>
+											  <option selected="selected">Pending</option>
+											  <option>Shipping</option>
+											  <option>Delivered</option>
+											  <?php endif ?>
+											  <?php if($ordstatus[$n] == 'Shipping'): ?>
+											  <option>Pending</option>
+											  <option selected="selected">Shipping</option>
+											  <option>Delivered</option>
+											  <?php endif ?>
+											  <?php if($ordstatus[$n] == 'Delivered'): ?>
+											  <option>Pending</option>
+											  <option>Shipping</option>
+											  <option selected="selected">Delivered</option>
+											  <?php endif ?>
+									    </select>
 							    	</td>
-							    	<td style="max-width: 90px; word-wrap: break-word; vertical-align: middle;" class="productname"><?php echo $productname[$n] ?></td>
-							    	<td>
-							    		<div class="row">
-							    			<div class="col-md-6">
-							    				<p class="amount" style="padding-left: 10px;margin-top: 40px;"><?php echo $amount[$n] ?></p>
-							    			</div>
-							    	    <div class="productid" style="display:none"><?php echo $productid[$n] ?></div>
-							    	    <div class="productprice" style="display:none"><?php echo $productprice[$n] ?></div>
-							    			<div class="col-md-6">
-							    				<button class="btn btn-sm btn-default quantity plus" style="margin-left: -40px; margin-top: 15px; margin-bottom: 10px; display:block;"><span class="glyphicon glyphicon-plus"></span></button>
-							    	      <button class="btn btn-sm btn-default quantity minus" style="margin-left: -40px; display:block;"><span class="glyphicon glyphicon-minus"></span></button>
-							    			</div>
-							    		</div>
-							    	</td>
-							    	
-							    	<td class="totalprice" style="padding-left: 10px;vertical-align: middle"><?php echo ($productprice[$n] * $amount[$n]) ?> SEK</td>
-							      <td style="vertical-align: middle"><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+							    	<td class="col-md-2"><?php echo $ordtotalprice[$n] ?></td>
+							    	<td class="col-md-2"><?php echo $ordnumitems[$n] ?></td>
+							    	<td style="vertical-align: middle"><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
 								  </tr>
 								<?php endfor ?>
 							  </tbody>
 			        </table>
 					  </div>
 					  <div class="panel-footer">
-					  	<div class="row">
-					  		<a href="checkout.php">
-					  		<div class="col-md-6">
-					  			<button class="btn btn-md btn-success btn-block" type="submit" name="submit">Checkout</button>
-					  		</div>
-					  		</a>
-					  		<div class="col-md-6">
-					  	        <button class="btn btn-md btn-danger btn-block clear" name="clear">Clear Cart</button>
-					  		</div>
-					  	</div>
 					  </div>
 					</div>
 	  		</div>

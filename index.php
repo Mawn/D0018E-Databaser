@@ -1,5 +1,20 @@
 <?php
   include("session.php");
+  
+  $sql = "SELECT * FROM products ORDER BY id DESC LIMIT 0, 4";
+  $result = mysqli_query($conn,$sql);
+  $i = 0;
+  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+    $prodid[$i] = $row['id'];
+    $prodname[$i] = $row['name'];
+    $prodprice[$i] = $row['price'];
+    $prodcategoryid[$i] = $row['categoryid'];
+    $prodstock[$i] = $row['stock'];
+    $proddescription[$i] = $row['description'];
+    $prodimageurl[$i] = $row['imageurl'];
+    $i = $i + 1;
+  }
+  mysqli_free_result($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,19 +32,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 	  .carousel {
-        margin-top: 20px;
-	    margin-bottom: 60px;
+      margin-top: -5px;
+	    margin-bottom: 50px;
 	  }
 	  .carousel-inner > .item > img, .carousel-inner > .item > a > img {
-		width: 100%;
+		  width: 100%;
 	    height: 100%;
 	  }
 	  .carouseltext {
-		margin-bottom: 150px;
+		  margin-bottom: 150px;
 	  }
 	  .btn-theme {
 	    margin-left: 15px;
-		margin-bottom: -5px;
+		  margin-bottom: -5px;
+	  }
+	  footer {
+	  	margin-top: -50px;
 	  }
     </style>
   </head>
@@ -168,32 +186,23 @@
     </div>
 	<!-- /.carousel -->
 	<div class="row">
-      <div class="col-lg-6">
-        <h4>Subheading</h4>
-        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-          
-		<h4>Subheading</h4>
-        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-        <h4>Subheading</h4>
-        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-      </div>
-      <div class="col-lg-6">
-        <h4>Subheading</h4>
-        <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-        <h4>Subheading</h4>
-        <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-        <h4>Subheading</h4>
-        <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-      </div>
-    </div>
+		<div class="col-md-12">
+			<button class="btn btn-md btn-info btn-block" style="margin-top: -45px;">Newest additions to our catalogue.</button>
+		</div>
+    <?php for($j=0;$j<$i;$j++): ?>
+			  <div class="col-sm-3">
+			    <div class="well well-sm">
+				  <a href="products.php"><img class="img-thumbnail" src="<?= $prodimageurl[$j] ?>" height="240" width="240"></a>
+				  <p><strong><?= $prodname[$j] ?></strong></p>
+				  <p><?= $prodprice[$j] ?> SEK</p>
+			    </div>
+			  </div>
+			<?php endfor ?>
+  </div>
 
       <!-- FOOTER -->
       <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias.</p>
+        <p>&copy; 2016 #DreamTeam Inc, by Reppe & Tobias. &middot; Image rights belong to <a href="https://maxgaming.com">Maxgaming</a>.</p>
       </footer>
 
     </div> 

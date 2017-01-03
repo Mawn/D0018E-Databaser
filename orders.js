@@ -6,26 +6,26 @@ $(document).ready(function() {
             tr.remove();
         });
         
-        id = $(this).closest("body").find(".userid").text(),
         orderid = $(this).closest('tr').find('.orderid').text();
         $.ajax({
             type: "POST",
             url: "/ajax/ordersdelete.php",
-            data: {"userid":id,
-                "orderid":orderid},
+            data: {"orderid":orderid},
             success: function(){
             }
         });
         return false;
     });
-    $(".clear").on("click",function() {
-        $("tbody tr").remove();
-        id = $(this).closest("body").find(".userid").text(),
-        $.ajax({
+    $(".selection").on("change",function() {
+       var id = $(this).closest('tr').find('.orderid').text(); 
+       var status = $(this).closest('tr').find(".selection option:selected").text();
+       $.ajax({
             type: "POST",
-            url: "/ajax/ordersdeleteall.php",
-            data: {"userid":id},
+            url: "/ajax/orderschange.php",
+            data: {"orderid":id,
+                   "status":status},
             success: function(){
+                alert( "Ordered status changed to ''" + status + "'' for Order ID # ''" + id + "''.");
             }
         });
         return false;

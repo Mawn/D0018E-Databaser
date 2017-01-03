@@ -44,9 +44,9 @@ $(document).ready(function() {
         amount = parseInt($currentvalue),
         myClass = $(this).attr("class");
         if (myClass.includes("minus")) {
-        amount = amount > 1 ? amount - 1 : 1;
+            amount = amount > 1 ? amount - 1 : 1;
         } else {
-        amount = amount < 100 ? amount + 1 : 100;
+            amount = amount < 100 ? amount + 1 : 100;
         }
         $.ajax({
             type: "POST",

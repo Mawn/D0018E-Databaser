@@ -15,6 +15,17 @@
 	<script src="javascript.js"></script>
 	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	  <style>
+	    .featurette-divider {
+        margin: 5rem 0;
+      }
+      .featurette-heading {
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -.05rem;
+        margin-top: 50px;
+      }
+	  </style>
   </head>
   <body>
 	<!-- Navigation -->
@@ -95,27 +106,25 @@
       <!-- /.container -->
 	</nav>
     <div class="container">
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+      <div class="row featurette">
+        <div class="col-md-4">
+          <img class="featurette-image img-fluid mx-auto" src="images/favicon.png" width="50%" height="50%" style="margin-top: 20%;">
         </div>
-
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
-
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
+        <div class="col-md-8">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <br><span class="text-muted" style="font-size: 0.65em;">See for yourself.</span></h2>
+          <p class="lead">DreamTeam Luleå is an E-Commerce Website made by Jesper Öhman, Tobias Arvidsson. The website sells electronic devices and computer peripherals. It is built in Bootstrap Framework, PHP, JavaScript (JQuery), MYSQL for database.</p>
+        </div>
+      </div>
+      
+      <hr class="featurette-divider">
+      
+      <div class="row featurette">
+        <div class="col-md-8">
+          <h2 class="featurette-heading">Luleå Tekniska Universitet <br><span class="text-muted" style="font-size: 0.65em;">Great ideas do indeed grow below zero!</span></h2>
+          <p class="lead">This website is made as part of a school project in the course D0018E.</p>
+        </div>
+        <div class="col-md-4">
+          <img class="featurette-image img-fluid" src="https://lh4.googleusercontent.com/-jDIogEt2EAE/AAAAAAAAAAI/AAAAAAAAAA0/rtGmITAXEiA/s0-c-k-no-ns/photo.jpg" width="50%" height="50%" style="margin-top: 20%;">
         </div>
       </div>
 

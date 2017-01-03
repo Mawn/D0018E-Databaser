@@ -4,16 +4,6 @@
   if(!isset($login_email)){
     header('location: index.php');
   }
-  /*$sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,1,4)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,3,3)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,6,1)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,10,5)";
-  mysqli_query($conn, $sql);
-  $sql = "INSERT INTO cart (userid, productid, amount) VALUES (1,15,2)";
-  mysqli_query($conn, $sql);*/
   $sql = "SELECT * FROM cart WHERE userid = '$login_id'";
   $result = mysqli_query($conn, $sql);
   $i = 0;
@@ -38,7 +28,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Your Cart - DreamTeam Luleå</title>
+    <title>Checkout - DreamTeam Luleå</title>
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -46,7 +36,6 @@
 	<link href="style.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="javascript.js"></script>
-	<script src="cart.js"></script>
 	<link rel="icon" type="image/png" href="images/favicon.png" sizes="32x32">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
@@ -64,10 +53,34 @@
 	  .panel-body{
 	  	min-height: 72vh;
 	  }
-	  .glyphicon-remove {
-	    margin-left: 5px;
-	    font-size: 1.5em;
+	  .input-text {
+	    color: #5a5a5a;
+		  padding-left: 2px;
+		  margin-top: 10px;
+		  margin-bottom: 5px;
+		  font-weight: bold;
 	  }
+	  .form-checkout {
+	    margin-left: 5%;
+	    width: 90%;
+	  }
+	  .table-fixed tbody {
+		  height: 190px;
+		  overflow-y: auto;
+		  margin-left: 5%;
+		  width: 90%;
+		}
+		.table-fixed thead {
+		  margin-left: 5%;
+		  width: 90%;
+		}
+		.table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+		  display: block;
+		}
+		.table-fixed tbody td, .table-fixed thead > tr> th {
+		  float: left;
+		  border-bottom-width: 0;
+		}
   </style>
   </head>
   <body>
@@ -133,7 +146,7 @@
 			      </ul>
 			    </li>
 			    <li class="active">
-				    <a href="#">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
+				    <a href="cart.php">Cart &nbsp<span style="font-size:1.15em;" class="glyphicon glyphicon-shopping-cart"></span> <span class="label label-info" style="margin-left: 10px;font-size: 15px"><?php echo $login_numofitems ?></span></span></a>
 			    </li>
 	      </ul>
       </div>
@@ -141,61 +154,58 @@
     </div>
       <!-- /.container -->
   </nav>
-    <div class="userid" style="display:none"><?php echo $login_id ?></div>
 	  <div class="container">
 	  	<div class="row">
 	  		<div class="col-md-8 col-md-offset-2">
 	  			<div class="panel panel-default">
-					  <div class="panel-heading">Your Shopping Cart</div>
-					  <div class="panel-body pre-scrollable">
-					    <table class="table">
-							  <thead>
-							    <tr>
-								  <th style="text-align: center;">Image</th>
-								  <th>Name</th>
-								  <th>Quantity</th>
-								  <th>Price</th>
-								  <th>Del</th>
-							    </tr>
-							  </thead>
-							  <tbody>
-							  <?php for($n=0; $n<$i; $n++): ?>
-							    <tr>
-							    	<td style="max-width: 100px;">
-							    		<center><img src="<?php echo $productimageurl[$n] ?>" height="96px" width="150px"></img></center>
-							    	</td>
-							    	<td style="max-width: 90px; word-wrap: break-word; vertical-align: middle;" class="productname"><?php echo $productname[$n] ?></td>
-							    	<td>
-							    		<div class="row">
-							    			<div class="col-md-6">
-							    				<p class="amount" style="padding-left: 10px;margin-top: 40px;"><?php echo $amount[$n] ?></p>
-							    			</div>
-							    	    <div class="productid" style="display:none"><?php echo $productid[$n] ?></div>
-							    	    <div class="productprice" style="display:none"><?php echo $productprice[$n] ?></div>
-							    			<div class="col-md-6">
-							    				<button class="btn btn-sm btn-default quantity plus" style="margin-left: -40px; margin-top: 15px; margin-bottom: 10px; display:block;"><span class="glyphicon glyphicon-plus"></span></button>
-							    	      <button class="btn btn-sm btn-default quantity minus" style="margin-left: -40px; display:block;"><span class="glyphicon glyphicon-minus"></span></button>
-							    			</div>
-							    		</div>
-							    	</td>
-							    	
-							    	<td class="totalprice" style="padding-left: 10px;vertical-align: middle"><?php echo ($productprice[$n] * $amount[$n]) ?> SEK</td>
-							      <td style="vertical-align: middle"><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
-								  </tr>
-								<?php endfor ?>
-							  </tbody>
+					  <div class="panel-heading">Checkout</div>
+					  <div class="panel-body">
+					    <div class="input-text" style="margin-left: 5%; margin-top: -5px;"><u>Order Information</u>:</div>
+						  <table class="table table-fixed">
+			          <thead>
+			            <tr>
+			              <th class="col-md-2">ID #</th><th class="col-md-5">Name</th><th class="col-md-3" style="text-align: center;">Quantity</th><th class="col-md-2">Price</th>
+			            </tr>
+			          </thead>
+			          <tbody>
+			          	<?php for($n=0; $n<$i; $n++): ?>
+			            <tr>
+			              <td class="col-md-2"><?php echo $productid[$n] ?></td><td class="col-md-6"><?php echo $productname[$n] ?></td><td class="col-md-2"><?php echo $amount[$n] ?></td><td class="col-md-2"><?php $total = $total + ($productprice[$n] * $amount[$n]); echo $productprice[$n] * $amount[$n] ?></td>
+			            </tr>
+									<?php endfor ?>
+			          </tbody>
 			        </table>
+			        <div class="pull-right input-text" style="margin-top: -20px; margin-right: 5%;">Total price of order: <?php echo $total ?></div>
+							<form class="form-checkout" action="orders.php" method="post">
+								<input type="hidden" class="form-control" value="<?php echo $total ?>" name="totalprice">
+								<div class="input-text">Credit Card Number</div>
+								<input type="text" class="form-control" value="XXXX-XXXX-XXXX-XXXX" name="creditcard" required readonly><br>
+								<div class="input-text">Shipping Name</div>
+							  <input type="text" class="form-control" name="shippingname" required><br>
+								<div class="input-text">Shipping Address</div>
+							  <input type="text" class="form-control" name="shippingaddress" required><br>
+							  <div class="row">
+							  	<div class="col-md-6">
+										<div class="input-text">Country</div>
+									  <input type="text" class="form-control" name="country" required>
+							  	</div>
+							  	<div class="col-md-6">
+										<div class="input-text">Zip</div>
+									  <input type="text" class="form-control" name="zip" required>
+							  	</div>
+							  </div>
 					  </div>
 					  <div class="panel-footer">
 					  	<div class="row">
-					  		<a href="checkout.php">
 					  		<div class="col-md-6">
-					  			<button class="btn btn-md btn-success btn-block" type="submit" name="submit">Checkout</button>
+					  			<button class="btn btn-md btn-success btn-block" type="submit" name="submit">Create Order</button>
+					  		</div>
+					    </form>
+					  		<a href="cart.php">
+					  		<div class="col-md-6">
+					  	        <button class="btn btn-md btn-danger btn-block" name="return">Back to Cart</button>
 					  		</div>
 					  		</a>
-					  		<div class="col-md-6">
-					  	        <button class="btn btn-md btn-danger btn-block clear" name="clear">Clear Cart</button>
-					  		</div>
 					  	</div>
 					  </div>
 					</div>

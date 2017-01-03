@@ -4,6 +4,68 @@
   if(!isset($login_email)){
     header('location: index.php');
   }
+  if(isset($_POST['submit'])){
+  	$totalprice = $_POST['totalprice'];
+  	$creditcard = $_POST['creditcard'];
+  	$shippingname = $_POST['shippingname'];
+  	$shippingaddress = $_POST['shippingaddress'];
+  	$shippingcountry = $_POST['country'];
+  	$shippingzip = $_POST['zip'];
+  	$status = "Pending";
+  	$sql = "INSERT INTO orders (userid, email, totalprice, status, shippingname, shippingaddress, country, zip) 
+  	VALUES ('$login_id', '$login_email', '$totalprice', '$status', '$shippingname', '$shippingaddress', '$shippingcountry', '$shippingzip')";
+  	mysqli_query($conn, $sql);
+  	$sql = "SELECT * FROM cart WHERE userid = '$login_id'";
+  	$result = mysqli_query($conn, $sql);
+  	$i = 0;
+  	while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+	    $productid[$i] = $row['productid'];
+	    $amount[$i] = $row['amount'];
+	    $i = $i + 1;
+	  }
+	  mysqli_free_result($result);
+	  
+	  $sql = "SELECT id FROM orders ORDER BY id DESC LIMIT 0, 1";
+	  $result = mysqli_query($conn, $sql);
+	  $row = mysqli_fetch_array($result, MYSQL_ASSOC);
+	  $orderid = $row['id'];
+	  mysqli_free_result($result);
+	  
+	  for($j=0;$j<$i;$j++){
+	  	$sql = "SELECT * FROM products WHERE id = '$productid[$j]'";
+	  	$result = mysqli_query($conn, $sql);
+	  	$row = mysqli_fetch_array($result, MYSQL_ASSOC);
+	  	$productname[$j] = $row['name'];
+	  	$productprice[$j] = $row['price'];
+	  	$productstock[$j] = $row['stock'];
+	  	$total[$j] = $amount[$j] * $productprice[$j];
+	  	$itemsql = "INSERT INTO item (productid, orderid, amount, price) VALUES ('$productid[$j]', '$orderid', '$amount[$j]', '$total[$j]')";
+	  	mysqli_query($conn, $itemsql);
+	  	//mysql_free_result($result);
+	  }
+    $sql = "DELETE FROM cart WHERE userid = '$login_id'";
+    mysqli_query($conn, $sql);
+    $login_numofitems = 0;
+  	//CALCULATE STOCK??
+  }
+  $sql = "SELECT * from orders WHERE userid = '$login_id'";
+  $result = mysqli_query($conn, $sql);
+  $k = 0;
+  while($row = mysqli_fetch_array($result, MYSQL_ASSOC)){
+  	$ordid[$k] = $row['id'];
+  	$ordtotalprice[$k] = $row['totalprice'];
+  	$ordstatus[$k] = $row['status'];
+  	$ordshippingname[$k] = $row['shippingname'];
+  	$ordshippingaddress[$k] = $row['shippingaddress'];
+  	$ordshippingcountry[$k] = $row['country'];
+  	$ordshippingzip[$k] = $row['zip'];
+  	$ordsql = "SELECT * from item WHERE orderid = '$ordid[$k]'";
+  	$orderresult = mysqli_query($conn, $ordsql);
+  	$ordnumitems[$k] = mysqli_num_rows($orderresult);
+  	mysqli_free_result($orderresult);
+  	$k = $k + 1;
+  }
+  mysqli_free_result($result);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +98,7 @@
 	  	min-height: 72vh;
 	  }
 	  .glyphicon-remove {
-	    margin-left: 5px;
+	    margin-left: 15px;
 	    font-size: 1.5em;
 	  }
   </style>
@@ -112,60 +174,54 @@
       </div>
       <!-- /.container -->
       </nav>
-<div class="userid" style="display:none"><?php echo $login_id ?></div>
+		<div class="userid" style="display:none"><?php echo $login_id ?></div>
 	  <div class="container">
 	  	<div class="row">
+	  		<?php if($login_isAdmin): ?>
+	  		<div class="col-md-2">
+	  			<div class="panel panel-default" style="height: 115px;">
+	  				<div class="panel-body">
+						  <ul class="nav nav-pills nav-stacked">
+						    <li class="active"><a href="#">Your Orders</a></li>
+						    <li><a href="ordersadmin.php">All Orders</a></li>
+						  </ul>
+	  				</div>
+	  			</div>
+				</div>
+				<?php endif ?>
+				<?php if($login_isAdmin): ?>
+	  		<div class="col-md-8 col-md-offset-0">
+	  		<?php endif ?>
+	  		<?php if(!$login_isAdmin): ?>
 	  		<div class="col-md-8 col-md-offset-2">
+	  		<?php endif ?>
 	  			<div class="panel panel-default">
 					  <div class="panel-heading">Your Orders</div>
 					  <div class="panel-body pre-scrollable">
 					    <table class="table">
 							  <thead>
 							    <tr>
-								  <th style="text-align: center;">Order ID</th>
-								  <th style="text-align: center;">Order Status</th>
-								  <th style="text-align: center;">Total Price</th>
-								  <th style="text-align: center;">Number of Items</th>
-								  <th style="text-align: center;">Cancel</th>
+								  <th class="col-md-2">ID #</th>
+								  <th class="col-md-3">Order Status</th>
+								  <th class="col-md-2">Total Price</th>
+								  <th class="col-md-3">Items</th>
+								  <th class="col-md-2">Cancel</th>
 							    </tr>
 							  </thead>
 							  <tbody>
-							  <?php for($n=0; $n<$i; $n++): ?>
+							  <?php for($n=0; $n<$k; $n++): ?>
 							    <tr>
-							    	<td style="max-width: 100px;">
-							    		<center><img src="<?php echo $productimageurl[$n] ?>" height="96px" width="150px"></img></center>
-							    	</td>
-							    	<td style="max-width: 90px; word-wrap: break-word; vertical-align: middle;" class="productname"><?php echo $productname[$n] ?></td>
-							    	<td>
-							    		<div class="row">
-							    			<div class="col-md-6">
-							    				<p class="amount" style="padding-left: 10px;margin-top: 40px;"><?php echo $amount[$n] ?></p>
-							    			</div>
-							    	    <div class="productid" style="display:none"><?php echo $productid[$n] ?></div>
-							    	    <div class="productprice" style="display:none"><?php echo $productprice[$n] ?></div>
-							    			<div class="col-md-6">
-							    				<button class="btn btn-sm btn-default quantity plus" style="margin-left: -40px; margin-top: 15px; margin-bottom: 10px; display:block;"><span class="glyphicon glyphicon-plus"></span></button>
-							    	      <button class="btn btn-sm btn-default quantity minus" style="margin-left: -40px; display:block;"><span class="glyphicon glyphicon-minus"></span></button>
-							    			</div>
-							    		</div>
-							    	</td>
-							    	
-							    	<td class="totalprice" style="padding-left: 10px;vertical-align: middle"><?php echo ($productprice[$n] * $amount[$n]) ?> SEK</td>
-							      <td style="vertical-align: middle"><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
+							    	<td class="col-md-2 orderid"><?php echo $ordid[$n] ?></td>
+							    	<td class="col-md-3"><?php echo $ordstatus[$n] ?></td>
+							    	<td class="col-md-3"><?php echo $ordtotalprice[$n] ?></td>
+							    	<td class="col-md-3"><?php echo $ordnumitems[$n] ?></td>
+							    	<td style="vertical-align: middle"><a name="remove" class="removeRow" href=""><span class="glyphicon glyphicon-remove"></span></a></td>
 								  </tr>
 								<?php endfor ?>
 							  </tbody>
 			        </table>
 					  </div>
 					  <div class="panel-footer">
-					  	<div class="row">
-					  		<div class="col-md-6">
-					  			<button class="btn btn-md btn-info btn-block" type="submit" name="submit">Edit Shipping Settings</button>
-					  		</div>
-					  		<div class="col-md-6">
-					  	        <button class="btn btn-md btn-danger btn-block clear" name="clear">Cancel All Orders</button>
-					  		</div>
-					  	</div>
 					  </div>
 					</div>
 	  		</div>

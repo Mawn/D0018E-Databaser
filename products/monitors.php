@@ -161,7 +161,9 @@
 				    <img class="img-thumbnail" src="<?= $prodimageurl[$j] ?>" height="240" width="240">
 				    <p><strong><?= $prodname[$j] ?></strong></p>
 				    <p><?= $prodprice[$j] ?> SEK</p>
-				    <button class="btn btn-block btn-primary add">Add to Cart</button>
+				    <?php if(isset($_SESSION['login_user'])): ?>
+					  <button class="btn btn-block btn-primary add">Add to Cart</button>
+					  <?php endif ?>
 			      </div>
 			    </div>
 			  <?php endif ?>
